@@ -1,0 +1,11 @@
+Open Limit Order v1 Core
+Copyright (c) 2026 YOU LI
+
+Licensed under the Business Source License 1.1: see LICENSE. The interfaces, src/interfaces/,
+are licensed under the MIT License instead: see LICENSE-MIT.
+
+Patent pending.
+
+For licensing, contact licensing@limitorder.org.
+
+Third-party code under lib/ (forge-std) keeps its own licenses (MIT or Apache-2.0) and is not covered by LICENSE.

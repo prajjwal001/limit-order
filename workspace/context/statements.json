@@ -1,0 +1,3822 @@
+{
+ "version": 1,
+ "files": [
+  {
+   "path": "context/context_doc_open_limit_order.md",
+   "statements": [
+    {
+     "id": "S1",
+     "lines": [
+      5,
+      5
+     ],
+     "quote": "Audit context for OLO at `limitorder-org/v1-core`, `main` @ <span style=\"color:#015b45\">`0f7ab6a`</span>. Scope: OLO (contracts `OloBook` and `OloBookExt`) and its owner contract `OloSentinel`, that is every file under `src/` and `sentinel/`.",
+     "dimensions": {
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S2",
+     "lines": [
+      14,
+      14
+     ],
+     "quote": "The scope is all of `src/` plus `sentinel/` in `v1-core` (<span style=\"color:#015b45\">(26</span> files, <span style=\"color:#015b45\">2,700</span> nSLOC). Everything else in the repository (`test/`, `docs/`, `lib/forge-std`) is out of scope.",
+     "dimensions": {
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S3",
+     "lines": [
+      73,
+      87
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>File</th><th>nSLOC</th><th>What it is</th></tr>\n</thead>\n<tbody>\n<tr><td>src/OloBook.sol</td><td>433</td><td>Core entry points: place, cancel,<br />claim, modify, take, takeThenRest,<br />multicall, deposit/withdraw, views<br />(marketIdGivenListingWord<br />among them), policy checks,<br />delegatecall forwarder</td></tr>\n<tr><td>src/base/OloBookTakes.sol</td><td>402</td><td>Take walk over a segmented list,<br />exact quote sum, quote mode, fill-or-<br />kill</td></tr>\n<tr><td>src/base/OloBookBatches.sol</td><td>249</td><td>Batch slots (up to four sub-orders,<br />bids, asks or both, a side bit each):<br />post, replace, modify, cancel, claim</td></tr>\n<tr><td>src/OloBookExt.sol</td><td>228</td><td>Delegatecall extension: open and<br />proprietary listing, the lister allow-<br />list, fee floors, fee and share<br />versions, listing fee, fee collection,<br />pool warming, the flash credit<br />(flash)</td></tr>\n<tr><td>src/base/OloBookOrders.sol</td><td>204</td><td>Pool-position orders: place, settle,<br />modify, probing</td></tr>\n<tr><td>src/base/OloBookAssets.sol</td><td>201</td><td>Accounts, wallet/account<br />settlement, fee split, the multicall<br />ledger</td></tr>\n<tr><td>sentinel/OloSentinel.sol</td><td>185</td><td>OLO’s owner: a timelock that<br />schedules each owner call a delay<br />ahead, one op per setting, with a<br />cancelling guardian</td></tr>\n<tr><td>src/OloTypes.sol</td><td>173</td><td>Storage keys and word layouts<br />(position, account, batch slot with<br />its side bits, listing word)</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S4",
+     "lines": [
+      95,
+      116
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>File</th><th>nSLOC</th><th>What it is</th></tr>\n</thead>\n<tbody>\n<tr><td>src/base/OloBookStorage.sol</td><td>111</td><td>Storage layout shared by the OLO<br />contract and its extension; market<br />registry; _current /<br />_checkCurrent; _admit (the policy<br />call)</td></tr>\n<tr><td>src/types/Market.sol</td><td>93</td><td>Listing parameters, the fields of the<br />market word C = K | tag (key: tokens,<br />spacing, minQuote, proprietary bit,<br />id; tag: maker share, fee, version),<br />and MarketLib, which reads and<br />builds C</td></tr>\n<tr><td>src/libraries/PriceGrid.sol</td><td>86</td><td>The 6-significant-figure price grid<br />and tick spacing</td></tr>\n<tr><td>src/interfaces/IOloBookBase.sol</td><td>77</td><td>Errors, events, listing getters</td></tr>\n<tr><td>src/interfaces/IOloBook.sol</td><td>45</td><td>NatSpec for every OLO entry point</td></tr>\n<tr><td>sentinel/IOloSentinel.sol</td><td>41</td><td>Sentinel interface, events and errors</td></tr>\n<tr><td>src/interfaces/OloListings.sol</td><td>35</td><td>A library for integrations: packs the<br />parameters a market was listed with<br />into its listing word and asks<br />marketIdGivenListingWord for the<br />id (marketIdOf, paramsOf)</td></tr>\n<tr><td>src/interfaces/IOloBookExt.sol</td><td>32</td><td>Extension entries</td></tr>\n<tr><td>src/libraries/OloMath.sol</td><td>29</td><td>Powers of ten, toUnits (units x<br />10^q)</td></tr>\n<tr><td>src/libraries/SafeTransfer.sol</td><td>20</td><td>ERC-20 and native transfers</td></tr>\n<tr><td>src/base/Owned2Step.sol</td><td>20</td><td>Two-step ownership</td></tr>\n<tr><td>src/interfaces/IOwned2Step.sol</td><td>11</td><td>Ownership interface</td></tr>\n<tr><td>src/libraries/Flags.sol</td><td>6</td><td>Settlement flags (WALLET, AUTO)</td></tr>\n<tr><td>src/interfaces/IERC20Minimal.sol</td><td>6</td><td>Minimal ERC-20 interface</td></tr>\n<tr><td>src/interfaces/IOloMarketPolicy.sol</td><td>4</td><td>The policy a proprietary market’s<br />lister supplies: admitted(marketId,<br />who, isMaker)</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S5",
+     "lines": [
+      124,
+      133
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>File</th><th>nSLOC</th><th>What it is</th></tr>\n</thead>\n<tbody>\n<tr><td>src/interfaces/IOloFlashCallback.sol</td><td>4</td><td>What a flash's caller answers:<br />oloFlashCallback(token, amount,<br />data)</td></tr>\n<tr><td>src/base/OloBookBase.sol</td><td>3</td><td>Base the two deployables inherit</td></tr>\n<tr><td>src/interfaces/MarketWord.sol</td><td>2</td><td>The MarketWord type (C), in its own<br />MIT file so the interfaces can name it</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S6",
+     "lines": [
+      136,
+      136
+     ],
+     "quote": "nSLOC here = non-blank, non-comment lines, counted from the files at <span style=\"color:#005b45\">`0f7ab6a` (2,700</span> in total). The <span style=\"color:#005b45\">nine</span> files in `src/interfaces/` are MIT; every other in-scope file is BUSL-1.1. A tool such as `cloc` or `solidity-code-metrics` may differ slightly.",
+     "dimensions": {
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S7",
+     "lines": [
+      140,
+      151
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Path</th><th>Why</th><th>Status</th></tr>\n</thead>\n<tbody>\n<tr><td>Deploy script and its test (internal)</td><td>Deploys OLO, sets production<br />parameters and hands OLO to a new<br />OloSentinel as its last step. Kept<br />internal: not in v1-core</td><td>Out</td></tr>\n<tr><td>test/** (with test/utils/**), docs/</td><td>Tests, reference models, mock and<br />hostile tokens; the assembly index and<br />the lint triage</td><td>Out</td></tr>\n<tr><td>lib/forge-std</td><td>Third-party</td><td>Out</td></tr>\n<tr><td>First-party router and aggregator<br />adapters</td><td>Planned to integrate OLO; not in this<br />repo</td><td>Out</td></tr>\n<tr><td>OLO Book (non on chain) components<br />(indexer, front end, sentinel watcher,<br />SDK, subgraph)</td><td>Publicly buildable; first-party ones will<br />be open source</td><td>Out</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S8",
+     "lines": [
+      165,
+      165
+     ],
+     "quote": "pays makers when they settle. It keeps no price levels, best price, bitmap or queue. The order books that takers take are reconstructed from OLO's on chain events, so there is no strict price-time priority on chain. An order that <span style=\"color:#025b44\">was emptied, or now rests at a price worse than the bound its list entry carries,</span> is skipped at take, as the in-built taker protection design.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S9",
+     "lines": [
+      173,
+      173
+     ],
+     "quote": "Model: a central limit order (CLOB) primitive. OLO leaves the order books themselves to the OLO Book and drops on-chain matching in favour of \"takes by position\": the taker names the exact orders to fill.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S10",
+     "lines": [
+      190,
+      190
+     ],
+     "quote": "- **One global price grid.** Tick t = d x 900,000 + j, P(t) = (100,000 + j) x 10^(d - 43) quote wei per base wei: 6 significant figures over 74 decades, ticks 1 .. 66,599,999. Makers rest at tick 3,600,000 or above and on the market's spacing (6, 5, 4 or 3 figures). Takers are not held to the spacing.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S11",
+     "lines": [
+      196,
+      196
+     ],
+     "quote": "- **Fee and share changes are new versions.** `setMarketFee` and `setMarketMakerShare` write the market's next version in place (same id and K; `MarketConfigSet`; at most 65,535 versions). An order always fills at its version's fee and settles at its version's share, so a change never reaches a resting order. Older versions fill, cancel and claim but rest nothing new (`MarketFrozen`).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S12",
+     "lines": [
+      205,
+      205
+     ],
+     "quote": "- **Proprietary markets.** C's bit 170 marks a proprietary market; only a word carrying it reaches that market's orders, and an open twin of the same parameters is a separate market. Only owner-allowed listers list one (`listMarketQuoteProprietary`), naming a policy fixed for good. OLO asks the policy (`IOloMarketPolicy.admitted`, a static call) before an entry that makes or takes there, never on exits.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S13",
+     "lines": [
+      207,
+      207
+     ],
+     "quote": "- **OLO contract + delegatecall extension.** Cold entries (listing, admin, fee collection, <span style=\"color:#025c45\">warming, flash</span>) run in `OloBookExt` by delegatecall on OLO's storage, to stay under EIP-170. A transient-storage lock guards every call that moves tokens.",
+     "dimensions": {
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S14",
+     "lines": [
+      208,
+      208
+     ],
+     "quote": "- <span style=\"color:#025c45\">**Flash credit.** `flash(token, amount, data)` credits the caller's account, calls `IOloFlashCallback.oloFlashCallback` on the caller (only on `msg.sender`) with the lock open, so the callback may call any entry (a nested flash included), then debits the account by the same amount: the flash reverts whole unless the account holds it again. Free (no fee). The credit is bounded by an account's 2^128 - 1, not by what OLO holds: a credit beyond OLO's holding of the token can be spent inside OLO but not withdrawn. Not a market entry, so no policy is asked; the entries the callback calls ask theirs.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S15",
+     "lines": [
+      369,
+      369
+     ],
+     "quote": "**Purpose.** Holds every balance. Each owner has one account per token, keyed `owner (160) | tokenId (32)` ; the word is `amount 0-127 | USED 255` . Owner `address(0)` 's account of a token is the protocol fee pot, `amount 0-254 | USED 255` , wider so a fee always has somewhere to go. Every operation settles its signed flows (quote, base) once, by the caller's settle flags. Not responsible for pricing or fills.",
+     "dimensions": {
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S16",
+     "lines": [
+      393,
+      393
+     ],
+     "quote": "- An owner's account caps at 2^128 - 1: a settle whose proceeds would pass it reverts `AmountOverflow`; that maker settles through the wallet instead.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S17",
+     "lines": [
+      394,
+      394
+     ],
+     "quote": "- `withdrawTo` OLO's own address or `address(0)` is `BadAddress`. A withdrawal above the balance is `InsufficientBalance`, however large (debits are unsigned).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S18",
+     "lines": [
+      395,
+      395
+     ],
+     "quote": "- Multicall `DEPOSIT` / `WITHDRAW` ops emit no `Deposit` / `Withdraw` event; the `Ops` stream carries them. An unregistered token id there is `BadOp` (not `UnknownToken`), and a zero amount is accepted.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S19",
+     "lines": [
+      421,
+      421
+     ],
+     "quote": "- A front-runner can occupy a named position (and its probes); this costs the user gas only, never money. And in real-world there is no incentive to do so.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S20",
+     "lines": [
+      422,
+      422
+     ],
+     "quote": "- The amount above units x 10^q (≤ 10^q - 1 wei, under 10^-8 of it) never leaves the user.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S21",
+     "lines": [
+      423,
+      423
+     ],
+     "quote": "- Rounding on a bid's place then cancel can cost the maker at most 1 quote wei where P is fractional (decades below 43).",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S22",
+     "lines": [
+      427,
+      427
+     ],
+     "quote": "**Purpose.** A maker's own slots, up to four sub-orders each, <span style=\"color:#035d46\">bids, asks or both,</span> keyed by `(version's C, maker, slot u16)` at `keccak256(C | maker 20 | slot 2 | 0x02)` and the next slot. Only the maker can rest, modify, cancel and claim there; a taker can only lower open in the main word, filling them like pool orders. Entry: `manageBatchSubs(K, p, amountWords)` with kind 0 post, 1 replace, 2 modify (by mask), 3 cancel (by mask), <span style=\"color:#035d46\">4 claim (5-15 <code>BadBatch</code>).</span>",
+     "dimensions": {
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S23",
+     "lines": [
+      447,
+      447
+     ],
+     "quote": "- `post` into a slot with any live sub-order is `SlotBusy`.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S24",
+     "lines": [
+      448,
+      448
+     ],
+     "quote": "- An emptied sub-order keeps its old base; nothing reads it until the index rests again. Indexers ignore it.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S25",
+     "lines": [
+      449,
+      449
+     ],
+     "quote": "- A modify whose order <span style=\"color:#065f49\">equals the sub-order's tick, open amount and side is</span> `NoChange` <span style=\"color:#065f49\">when the sub-order has nothing to settle, and an empty index's all-zero order is</span> `NoChange` <span style=\"color:#065f49\">(whatever its side)</span> when the slot still has live sub-orders; a modify or cancel of a slot with none live is `NoOrder`; a post or replace naming no orders is `ZeroSize`.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S26",
+     "lines": [
+      450,
+      450
+     ],
+     "quote": "- A replace re-prices every sub-order it rests (up to 1 quote wei of rounding per bid sub-order); modify-by-mask leaves the others untouched.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S27",
+     "lines": [
+      458,
+      458
+     ],
+     "quote": "- <span style=\"color:#035d47\">A modify naming the other side turns the sub-order: its fills settle on its old side and the new order is escrowed on the new one. A sub-order filled to no open units is still live and keeps its side until a settle empties it.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S28",
+     "lines": [
+      459,
+      459
+     ],
+     "quote": "- A replace naming the current version finds that version's own slot (empty for a slot posted before the change), rests there like a post, and leaves the older slot live and fillable beside it.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S29",
+     "lines": [
+      460,
+      460
+     ],
+     "quote": "- Batch operations are not multicall ops.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S30",
+     "lines": [
+      466,
+      466
+     ],
+     "quote": "**Purpose.** Fills the orders a taker names, in the order named, in the version the params' tag names, and settles the taker once. Entries: `take(K, list, p)` and `takeThenRest(K, list, p)` (renamed from `takeAndRest`). Not responsible for finding the best price, quoting, or a bound on the whole take (that is a router's job).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S31",
+     "lines": [
+      504,
+      504
+     ],
+     "quote": "- A router can take on its own accounts (funds it deposited) or with wallet settlement, but never on an end user's accounts: OLO settles only the caller's accounts, with no operator. <span style=\"color:#015b44\">The only</span> callback is a flash's, to the flash's own caller.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S32",
+     "lines": [
+      514,
+      514
+     ],
+     "quote": "- An order repriced better fills at its own (better) tick; one repriced <span style=\"color:#035d47\">to a price worse than the entry's bound is skipped. The bound is the entry's tick, not the price seen when the list was built: a buy that saw 100 with a bound of 101 still fills an ask repriced to 100.5, at 100.5.</span> A take names positions and limit ticks, not orders or makers: a position whose order was replaced, even by another maker, still fills if the new order is on the side the taker hits and at or better than the entry's tick.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S33",
+     "lines": [
+      515,
+      515
+     ],
+     "quote": "- A `takeThenRest` whose rest position and every probe are busy reverts the whole call `SlotBusy`, fills included. An invalid limit with a remainder reverts `TickOutOfRange`.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S34",
+     "lines": [
+      516,
+      516
+     ],
+     "quote": "- The OLO Book's order books can be crossed until arbitraged.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S35",
+     "lines": [
+      588,
+      588
+     ],
+     "quote": "- <span style=\"color:#025c45\">Called directly (not via OLO), the extension runs on its own storage, not OLO's: owner is zero so admin entries revert, and listing and warming write its own slots. A flash there finds no token (`UnknownToken`) until someone lists a market on the extension itself; after that it credits an account in the extension's storage, and the callback comes from the extension's address. Nothing reaches OLO's accounts or funds; a flash callback checks that `msg.sender` is the OloBook it expects (`test_flash_on_the_extension_directly`).</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S36",
+     "lines": [
+      590,
+      590
+     ],
+     "quote": "- A fee change neither frees the parameters it listed at nor takes the ones it moves to, so anyone can list the same pair, spacing and minQuote at the fee another market moved to (accepted).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S37",
+     "lines": [
+      591,
+      591
+     ],
+     "quote": "- No pause, no upgrade, no delisting.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S38",
+     "lines": [
+      611,
+      611
+     ],
+     "quote": "**Purpose.** Owns OLO, so every owner call is an op of the sentinel's: the admin schedules it, everyone sees it in full in `Scheduled(key, eta, op)`, and the admin runs it from its eta to eta + 7 days (`GRACE`), after which it expires. Built apart in `sentinel/` with its own Foundry profile. Not involved in listing, fee collection or warming (anyone's), nor in anything inside OLO.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S39",
+     "lines": [
+      631,
+      631
+     ],
+     "quote": "**Expected inputs.** The admin is a Safe whose signers sign each change twice (schedule and execute). The guardian is an EOA, so a single key can cancel an op quickly (the NatSpec in OloSentinel.sol still calls it a second multisig; the contract takes any address; in production it could either be a multisig or a ledger EOA). A market's fee and share are two keys: schedule and execute them together, share first, so makers move to one new version. Someone watches `Scheduled` from the sentinel's deployment block.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S40",
+     "lines": [
+      635,
+      635
+     ],
+     "quote": "- With OLO's 1% step, a market's fee and the global floor move at most 1% per delay.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S41",
+     "lines": [
+      636,
+      636
+     ],
+     "quote": "- An op may name a market id not yet listed. <span style=\"color:#005a44\">Nothing can be scheduled before the sentinel owns OLO, and once it has handed OLO on, an op to OLO reverts there (`NotOwner`) while one of the sentinel's own settings still runs.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S42",
+     "lines": [
+      644,
+      644
+     ],
+     "quote": "- A delay change is itself an op that waits the current delay; ops scheduled before it keep their eta.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S43",
+     "lines": [
+      645,
+      645
+     ],
+     "quote": "- At most two versions of a market per delay, so 65,535 versions last about 89 years at one day.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S44",
+     "lines": [
+      649,
+      649
+     ],
+     "quote": "**Purpose.** Markets for regulated venues whose traders a policy admits, on OLO's same accounts and code paths as open markets. Not responsible for the admission process itself (the lister's policy and its own checks, such as a KYB).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S45",
+     "lines": [
+      655,
+      655
+     ],
+     "quote": "- Asked as a maker: place, modify, batch post / replace / modify, a multicall run's first PLACE or MODIFY in the market, a takeThenRest's rest. Asked as a taker: take (once, before the list) and takeThenRest's fills. Never asked: cancel, claim, batch cancel / claim, multicall CANCEL / CLAIM, deposit, <span style=\"color:#035d47\">withdraw, and flash itself (the entries its callback calls ask theirs).</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S46",
+     "lines": [
+      678,
+      678
+     ],
+     "quote": "- The owner has no power over a proprietary market's admissions: no switch, no policy replacement. The lister's switch is the policy itself, which can stop making and taking but never an exit.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S47",
+     "lines": [
+      683,
+      683
+     ],
+     "quote": "**Areas of concern.** `unchecked` arithmetic and its stated bounds; the storage layout OLO shares with its extension; market versions (K vs C, tags); the 10 assembly blocks; quote-mode budget <span style=\"color:#015b45\">maths, fees up to 100% included;</span> batch-slot <span style=\"color:#015b45\">settlement with bids and asks in one slot;</span> the multicall ledger; <span style=\"color:#015b45\">the flash credit (a callback with the lock open, every entry reachable inside it, the debit as the only repayment);</span> OloSentinel's op decoding, time window and <span style=\"color:#015b45\">stretches of ownership;</span> the proprietary policy call (`_admit`). These are not considered valid findings, but the areas to check.",
+     "dimensions": {
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S48",
+     "lines": [
+      689,
+      689
+     ],
+     "quote": "The same three contracts deploy on every chain (`OloBook`, `OloBookExt`, and `OloSentinel` as the owner); roles do not differ by chain. The chain needs the Cancun EVM (EIP-1153 transient storage; Shanghai's `PUSH0`). `OloBook` is <span style=\"color:#015b45\">22,708</span> B, under the EIP-170 limit of 24,576 B.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S49",
+     "lines": [
+      707,
+      715
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Chain</th><th>Status</th><th>Notes</th></tr>\n</thead>\n<tbody>\n<tr><td>Other compatible EVM<br />chains (for example<br />Robinhood Chain, X Layer)</td><td>Production later</td><td>An open list, not limited to these<br />examples. Each needs Cancun<br />opcodes and a native currency that is<br />not an ERC-20</td></tr>\n<tr><td>Celo, Metis Andromeda (and<br />any chain whose native<br />currency is also an ERC-20)</td><td>Never deploy (a<br />team rule)</td><td>collectFees(address(0)) would pay<br />out deposits of that token</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S50",
+     "lines": [
+      718,
+      718
+     ],
+     "quote": "**Mempool.** Ethereum and BSC have public mempools; takers are suggested to send takes through a private RPC. Base and the Nitro chains (Arbitrum One, Robinhood Chain) are sequencer-ordered with no public mempool, so a maker cannot react to a take before it is ordered, provided the sequencer is honest and the submission path does not leak the transaction. That is an assumption about the chain, not a guarantee of the contracts: a malicious sequencer can front-run. These are not considered known issues, but assumptions about the chains.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S51",
+     "lines": [
+      724,
+      724
+     ],
+     "quote": "Listing is permissionless: anyone can list any two distinct addresses that have code, so on chain any token can trade. The front end lists only the markets it vets, under a token policy: plain ERC-20s, no rebasing, quote tokens of 6 or more decimals, and the freeze a pausable or blacklisting token (USDC, USDT) can impose accepted knowingly. Users of markets outside the front end's list are expected to do their own due diligence.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S52",
+     "lines": [
+      727,
+      727
+     ],
+     "quote": "**Launch markets.** Majors (WBTC, WETH, WBNB), stablecoins, tokenised RWAs and memecoins. Quote tokens are flexible but mostly stablecoins or majors. No fee-on-transfer or rebasing tokens are listed.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S53",
+     "lines": [
+      733,
+      733
+     ],
+     "quote": "- **Fee-on-transfer on pull:** refused. `_pull` requires OLO's balance to rise by exactly the amount (`FeeOnTransfer`).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S54",
+     "lines": [
+      734,
+      734
+     ],
+     "quote": "- **Fee or extra debit on push:** not checked, by design (a check would turn a shortfall for the last withdrawer into a freeze for everyone). A token that turns a fee on after listing degrades to refusing new deposits while payouts continue.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S55",
+     "lines": [
+      735,
+      735
+     ],
+     "quote": "- **Rebasing:** not supported; balances that move on their own leave OLO short of that token, the last to withdraw short. Use a non-rebasing wrapper (wstETH).",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S56",
+     "lines": [
+      736,
+      736
+     ],
+     "quote": "- **Pausable / blacklist:** can freeze every balance and order of that token in OLO. Accepted.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S57",
+     "lines": [
+      737,
+      737
+     ],
+     "quote": "- **No-return tokens:** accepted when the token has code (`SafeTransfer`).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S58",
+     "lines": [
+      745,
+      745
+     ],
+     "quote": "- **Decimals:** invariant tests cover tokens of 0, 6, 8, 18 and 24 decimals. Rounding is per amount: a take rounds its quote and its fee once each, and each pool order or batch sub-order rounds its own escrow and settlement (four unfilled bids in one batch slot, each worth 1.5 quote wei, escrow 8 and refund 4 on a cancel: 4 quote wei). So quotes of fewer than 6 decimals are outside the policy.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S59",
+     "lines": [
+      746,
+      746
+     ],
+     "quote": "- **Native currency:** not tradable; it is used only for the listing fee.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S60",
+     "lines": [
+      753,
+      753
+     ],
+     "quote": "- On chain, only proprietary market <span style=\"color:#015c46\">policies and a flash's own caller:</span> no oracles, AMMs or bridges. OLO calls only ERC-20 `transfer` / `transferFrom` / `balanceOf`, sends native currency to the fee <span style=\"color:#015c46\">recipient, and calls `oloFlashCallback` on the caller of a flash (only on `msg.sender`, so nobody can start a flash that calls another contract back).</span> `OloSentinel` calls only OLO. A proprietary market's policy (IOloMarketPolicy.admitted) is a lister-supplied contract, possibly upgradeable, that OLO static-calls before making or taking in that market; it can refuse those but never an exit.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S61",
+     "lines": [
+      756,
+      756
+     ],
+     "quote": "- Optional: makers may use contract wallets or EIP-7702 accounts to send several batch operations in one transaction; OLO treats them as any `msg.sender`.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S62",
+     "lines": [
+      762,
+      762
+     ],
+     "quote": "The contracts are immutable: no proxy, no upgrade, no pause, no delisting. OLO's owner is `OloSentinel`, so every owner change is announced on chain a delay ahead and can be cancelled by a guardian. The owner can change fees and shares within bounds; no change reaches a resting order, and the owner has no hand on escrow, proceeds, balances or orders.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S63",
+     "lines": [
+      772,
+      783
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Role</th><th>Trust</th><th>Can</th><th>Must not be able to</th></tr>\n</thead>\n<tbody>\n<tr><td>OLO owner =<br />`OloSentinel`<br />(code)</td><td>Enforced by<br />code</td><td>Run OLO's nine owner<br />setters and<br />`transferOwnership`,<br />each only as an op<br />scheduled ≥ delay ahead,<br />executed within 7 days of<br />its eta, one pending op<br />per setting</td><td>Run anything sooner<br />than the delay, or<br />two changes of one<br />setting per delay;<br />schedule while it<br />does not own OLO, or<br />run an op scheduled<br />before its last<br />takeover; call the<br />listing, collectFees,<br />warmPool or flash<br />entries (a<br />setMarketFee op<br />may warm its new<br />version)</td></tr>\n<tr><td>Sentinel admin (a<br />Safe)</td><td>Fully trusted</td><td>Schedule, execute and<br />cancel any op; change<br />delay (1-30 days),<br />guardian and admin, each<br />as an op</td><td>Skip the delay; move<br />user balances,<br />escrow or proceeds;<br />touch resting orders</td></tr>\n<tr><td>Sentinel guardian<br />(an EOA)</td><td>Fully trusted</td><td>Cancel any op except a<br />guardian change</td><td>Schedule or execute<br />anything; block its<br />own replacement</td></tr>\n<tr><td>Fee recipient</td><td>Trusted to<br />receive</td><td>Receives pots and native<br />listing fees via<br />`collectFees` (callable by<br />anyone). Cannot be zero<br />or OLO itself. A recipient<br />that refuses native<br />currency reverts only the<br />native collection.</td><td>Anything else</td></tr>\n<tr><td>Upgrade authority</td><td>None</td><td>OLO, its extension and<br />the sentinel are<br />immutable. A permanent<br />lock of funds cannot be<br />rescued by an upgrade.</td><td>n/a</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S64",
+     "lines": [
+      791,
+      802
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Role</th><th>Trust</th><th>Can</th><th>Must not be able to</th></tr>\n</thead>\n<tbody>\n<tr><td>Lister</td><td>Untrusted<br />(anyone)</td><td>List any two distinct<br />contracts at any fee from<br />the floor to 1,000,000 ppm<br />(100%), any sigFigs 3-6,<br />any minQuote; pays the<br />exact listing fee</td><td>List the same<br />parameters twice;<br />list below the floor</td></tr>\n<tr><td>Maker</td><td>Untrusted</td><td>Reprice a named order<br />past the entry’s bound, or<br />cancel it, before a take<br />lands (“last look”); a<br />reprice within the bound<br />still fills, at the new price</td><td>Make a taker pay<br />more than an entry’s<br />tick; touch another<br />maker’s orders or<br />slots</td></tr>\n<tr><td>Taker, warmer, fee<br />collector, flash<br />borrower</td><td>Untrusted<br />(anyone)</td><td>Fill named orders; warm<br />positions; trigger<br />collectFees; take a free<br />flash credit of any<br />registered token and call<br />any entry inside its<br />callback</td><td>Redirect fees away<br />from feeRecipient;<br />end a flash with the<br />credit unrepaid; have<br />OLO call back any<br />address but the<br />flash’s caller</td></tr>\n<tr><td>Proprietary lister<br />(owner-allowed)</td><td>Trusted toward<br />its own market’s<br />traders, and by<br />the OLO team</td><td>List proprietary markets,<br />each with a policy fixed<br />for good; its policy can<br />stop making and taking in<br />its markets at any time</td><td>Block cancels,<br />claims, deposits or<br />withdrawals; affect<br />any other market;<br />change a listed<br />market’s policy</td></tr>\n<tr><td>Market policy<br />(lister’s contract)</td><td>Untrusted<br />beyond its own<br />market</td><td>Answer<br />admitted(marketId, who,<br />isMaker) for makers and<br />takers of its market;<br />refuse by reverting,<br />running out of gas or<br />answering anything but<br />true</td><td>Change OLO’s state<br />(static call); be asked<br />on exits; reach<br />another market</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S65",
+     "lines": [
+      838,
+      848
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Parameter</th><th>Set by (role)</th><th>Valid range (enforced)</th><th>Expected production value</th><th>Controls</th></tr>\n</thead>\n<tbody>\n<tr><td>minQuote</td><td>Lister, per market</td><td>uint96 quote wei (0 =<br />any order of one unit)</td><td>Chosen by each<br />market's lister</td><td>Least a resting order<br />is worth at its tick</td></tr>\n<tr><td>Positions warmed</td><td>Lister (positionsToWarm), owner on a<br />fee change, anyone (warmPool)</td><td>warmPool: 1-512 a call</td><td>256 at deployment<br />(WARM)</td><td>Pre-written pool<br />positions (gas only)</td></tr>\n<tr><td>Proprietary<br />listers</td><td>setProprietaryListingAllowed(lister,<br />allowed) (owner op)</td><td>Any address, allow or<br />stop; one change per<br />lister per delay</td><td>None at deployment;<br />trusted third parties<br />added later as<br />institutional<br />business grows</td><td>Who may list<br />proprietary markets;<br />a stopped lister's<br />markets keep trading</td></tr>\n<tr><td>Market policy</td><td>Proprietary lister, at listing</td><td>Any contract with<br />code; fixed for good</td><td>Chosen by each<br />proprietary market's<br />lister</td><td>Admission of makers<br />and takers in that<br />market</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S66",
+     "lines": [
+      859,
+      859
+     ],
+     "quote": "- **Failure mode** — if the indexer or front end is down or wrong, users can still cancel, claim and withdraw on chain directly (`orderOf`, `batchOf`, `balanceOf` views).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S67",
+     "lines": [
+      860,
+      860
+     ],
+     "quote": "- **Incident response** — there is no switch in OLO. The response happens in the OLO Book: the front end delists the market or stops routing to OLO, and the indexer shows makers their orders to cancel and balances to withdraw.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S68",
+     "lines": [
+      879,
+      879
+     ],
+     "quote": "- **Large take denied by a listed maker.** Trigger: a maker whose order a taker names reprices it down to decade 4 (tick 3,600,000 or just above) before the take lands; the take's exact sum is then aligned to decade 4 and Q x 10^39 ≥ 2^235 reverts `AmountOverflow`. Impact: that caller's take reverts (no funds move), only for takes worth ≥ ~5.52e31 quote wei, reachable only with quote tokens of 24+ decimals or tiny unit value. Accepted: split large takes or list trusted makers; pinned by `test/OloMakerFloor.t.sol`.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S69",
+     "lines": [
+      880,
+      880
+     ],
+     "quote": "- **Last look.** Trigger: a maker (pool or batch) reprices a named order <span style=\"color:#025c46\">to a price worse than the entry's bound, or cancels it,</span> before a take lands (a replacement on the side the taker hits, at the same or a better price, still fills). Impact: the entry is skipped <span style=\"color:#025c46\">(a reprice that stays within the bound still fills, at the new price)</span>. Accepted: no cooldown or cancel fee; takers are encouraged to send privately, use FOK, <span style=\"color:#025c46\">write ladder lists (each entry bounded by the next order's price, the limit last),</span> and spread lists over makers.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S70",
+     "lines": [
+      881,
+      881
+     ],
+     "quote": "- **No whole-take bound in core.** `take` bounds prices by the list and size by the amount and FOK only; `amountOutMin` / `amountInMax` are a router's, this is in line with other DEX's design.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S71",
+     "lines": [
+      882,
+      882
+     ],
+     "quote": "- **No strict on-chain price-time priority; a crossed OLO Book.** \"Open matching\" is part of the OLO's concept, which the taker chooses which orders fill; the OLO Book's order books can be crossed until arbitraged (available to everyone).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S72",
+     "lines": [
+      883,
+      883
+     ],
+     "quote": "- **One version per take.** A take fills only the version its tag names; liquidity resting in other versions of the same market needs another call.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S73",
+     "lines": [
+      884,
+      884
+     ],
+     "quote": "- **`takeThenRest` rest-position squatting.** Trigger: on a public mempool, a front-runner fills the named rest position and all probes. Impact: the whole call reverts `SlotBusy`, fills included, costing the taker ~72k gas against ~277k for the squatter (escrow refundable). Accepted: random warmed position + 7 probes + private submission; no strong incentive to perform such attack",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S74",
+     "lines": [
+      885,
+      885
+     ],
+     "quote": "- **<span style=\"color:#025c46\">Dead positions taken over at a list's limit.</span>** <span style=\"color:#025c46\">Trigger: a list that puts the taker's limit in every entry; anyone places at a dead position the list names ahead of better orders, at that entry's tick (watching the mempool, or passively placing at wide prices wherever a position dies and waiting for stale lists). Impact: the taker pays up to its limit for what a better order behind would have sold (1,010,051 instead of 1,000,061 quote wei</span>",
+     "dimensions": {
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S75",
+     "lines": [
+      887,
+      887
+     ],
+     "quote": "Page 31 of 42",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S76",
+     "lines": [
+      893,
+      893
+     ],
+     "quote": "for one lot at a 1% limit, `test/OloTakeLists.t.sol`). Accepted: list builders write a ladder, so only a last entry taken over fills at the limit, a price the taker accepted. Batch slots are their maker's and are not exposed.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S77",
+     "lines": [
+      895,
+      895
+     ],
+     "quote": "- <span style=\"color:#035d47\">**A dust bid refuses a sell that fills only it.**</span> <span style=\"color:#035d47\">Trigger: what a fill leaves of a bid is worth under 2 quote wei, and a sell's list fills only that, so `floor(Q) <= ceil(Q x feePpm / 10^6)`. Impact: the sell `take` or `takeThenRest` reverts whole (`SellBelowFee`), the rest with it; nothing moves. Accepted: list builders leave the dust out; beside a real bid it is swept (`test/OloTakeLists.t.sol`). Letting the fee take the whole quote would let a sell give base for nothing.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S78",
+     "lines": [
+      896,
+      896
+     ],
+     "quote": "- <span style=\"color:#035d47\">**A quote-mode sell whose budget passes 2^126 is refused.**</span> <span style=\"color:#035d47\">Trigger: a market fee of 999,939 ppm or more, where a sell's budget `A x 10^6 / (10^6 - feePpm)` can pass 2^126 (about 8.5e37 quote wei). Impact: the take reverts `AmountOverflow` at the first order its walk reaches, even where its list would fill within the exact budget. Accepted: split the amount or sell in base mode.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S79",
+     "lines": [
+      900,
+      900
+     ],
+     "quote": "- **Position squatting.** A front-runner can occupy a named pool position for its own ~34.4k place; the user pays ~2.3k for a probe or one reverted place (~24.6k). Gas only. No strong incentive to perform such attack",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S80",
+     "lines": [
+      901,
+      901
+     ],
+     "quote": "- **Sub-wei rounding.** Quote amounts round in OLO's favour (up in, down out). Where P is fractional (decades below 43) a bid's place then cancel loses at most 1 quote wei; a batch replace the same per bid sub-order; each settle floors its proceeds once, so settling more often can lose up to a wei per settle. A user's amount above units x 10^q (< 10^-8 of it) stays with the user. Rounding stays in OLO, nobody's.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S81",
+     "lines": [
+      902,
+      902
+     ],
+     "quote": "- **Emptied sub-order keeps its base.** An emptied batch sub-order's base in the settlement word is stale and never read until the index rests again; indexers ignore it.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S82",
+     "lines": [
+      906,
+      906
+     ],
+     "quote": "- **A fee or share change is a new version, not an in-place change.** Trigger: `setMarketFee` or `setMarketMakerShare`. Impact: orders resting in older versions keep their fee and share and still fill, cancel and claim, but cannot be modified or replaced (`MarketFrozen`); makers cancel and re-place under K. The new version's positions and slots are cold: a place about +17,100 gas and a 4-order batch post about +37,000, once per position or slot; a multicall under a K header pays a cold registry read (+2,249). Accepted.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S83",
+     "lines": [
+      907,
+      907
+     ],
+     "quote": "- **Protocol revenue arises at the maker's settle.** A `Take` event's fee is held, not revenue; a maker that never settles defers the protocol's part, and the owner cannot force a settle.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S84",
+     "lines": [
+      915,
+      915
+     ],
+     "quote": "- **Pot write cost.** At any share below 10,000 a settle that pays fills with a nonzero fee credits the pot, ~5.1k gas per transaction; accepted.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S85",
+     "lines": [
+      918,
+      918
+     ],
+     "quote": "- **Account cap.** An owner's account holds at most 2^128 - 1; a settle that would pass it reverts `AmountOverflow` and must settle through the wallet.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S86",
+     "lines": [
+      921,
+      921
+     ],
+     "quote": "- <span style=\"color:#025c46\">**<span style=\"color:#065f49\">A flash removes a self-trade's need for capital.</span>** Trigger: a borrower rests an ask on a flash of base, takes it on a flash of quote and claims it, repaying both. Impact: what a self-trade costs is the taker's fee less the maker's part of it, 0 at a maker share of <mark style=\"background-color:#065f49\">100% when nothing rounds, so it ends with nothing, having paid only gas. The protocol</mark> loses nothing, but volume and trade records are no evidence of capital or of a second party. Accepted: the flash is free by choice; whatever ranks or rewards by volume reads it so.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S87",
+     "lines": [
+      926,
+      926
+     ],
+     "quote": "- Pushes are not balance-checked; rebasing tokens leave OLO short of that token; pausable or blacklisting tokens can freeze every balance and order of that token; fee-on-transfer pulls are refused. Impact stays with that token's holders.",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S88",
+     "lines": [
+      929,
+      929
+     ],
+     "quote": "- **Native currency that is also an ERC-20 (Celo, Metis).** `collectFees(address(0))` would pay deposits of that token to the fee recipient. Accepted: never deploy on such chains; the contract is left as it is.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S89",
+     "lines": [
+      934,
+      934
+     ],
+     "quote": "- **Fee steps bound a call; the sentinel bounds the rate.** Each owner fee or floor call moves ≤ 1%, and the sentinel allows one change per setting per delay, so a market's fee and the global floor move ≤ 1% per delay. What a pair's next listing meets (its own floor, else the global one) is fed by two keys: up to 2% in one run, 4% in two, at most (n + 2)% over n runs, (n + 1)% for a pair with no floor of its own. Accepted: listings only; no market's fee moves this way.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S90",
+     "lines": [
+      937,
+      937
+     ],
+     "quote": "- **Floors bind listings only.** Existing markets keep their fee, and setMarketFee does not check the floor, so an owner op can move a market below it. Anyone may relist an official pair's parameters at the global floor (e.g. 10 bps beside an official 12 bps).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S91",
+     "lines": [
+      940,
+      940
+     ],
+     "quote": "- **Look-alike markets at another fee.** The listing word is written once, so a fee change neither frees the parameters it listed at nor takes the ones it moves to: anyone can list the same pair, spacing and minQuote at the fee another market moved to. Accepted.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S92",
+     "lines": [
+      943,
+      943
+     ],
+     "quote": "- **Listing spam and look-alike markets.** Permissionless; mitigated by the optional listing fee and the front end's filtering of market ids.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S93",
+     "lines": [
+      946,
+      946
+     ],
+     "quote": "- **Version limit.** At most 65,535 versions per market (`TooManyVersions`), after which its fee and share are fixed. Under the sentinel at most two versions per delay: about 89 years at one day.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S94",
+     "lines": [
+      954,
+      954
+     ],
+     "quote": "- <span style=\"color:#025c45\">**A fee of 100% is allowed.** Trigger: a lister lists, or the owner moves a market, to 1,000,000 ppm. Impact: every sell that fills reverts `SellBelowFee`, and a buy pays its quote twice. Accepted: the cap is the whole quote; the front end vets markets' fees.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S95",
+     "lines": [
+      955,
+      955
+     ],
+     "quote": "- **No pause, no upgrade, no delisting.** Response to a defect happens in the OLO Book (front end delists; indexer guides users out).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S96",
+     "lines": [
+      959,
+      959
+     ],
+     "quote": "- **A lost admin has no recovery.** Only the admin schedules a new admin; the guardian can only cancel, which stops every owner call. OLO runs on.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S97",
+     "lines": [
+      960,
+      962
+     ],
+     "quote": "- **Before the handover the deployer owns OLO with no delay.** The deploy script hands over as its last step.\n-\n**After a `transferOwnership` op runs, no delay applies.** The proposed owner may accept at any later time; a nonzero `OloBook.pendingOwner()` is to be treated as an alert.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S98",
+     "lines": [
+      963,
+      963
+     ],
+     "quote": "- **Safe signer and threshold changes are not delayed.** The trust is in the admin Safe's signer set and in the guardian's key.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S99",
+     "lines": [
+      964,
+      964
+     ],
+     "quote": "- **The delay protects only if someone watches.** Ops may name market ids not yet listed.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S100",
+     "lines": [
+      965,
+      967
+     ],
+     "quote": "- **A guardian gone wrong** can cancel every other op until the admin's guardian change runs a delay later; no funds move.\n-\n<span style=\"color:#025c45\">**A proposed sentinel admin does not expire.** Once a `transferAdmin` op has run, the proposed admin may accept at any later time; withdrawing the proposal (`transferAdmin(address(0))`) is an op too, a delay ahead, during which it may still accept and which the guardian may cancel. Accepted: the admin proposes only an address about to accept; a nonzero `pendingAdmin()` is to be treated as an alert.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S101",
+     "lines": [
+      968,
+      968
+     ],
+     "quote": "- <span style=\"color:#025c45\">**Ops do not outlive a stretch of ownership.** Ops scheduled before the sentinel last took OLO over from another owner are stale (they never run and hold no key), and once the sentinel has handed OLO on its ops to OLO revert `NotOwner`. A sentinel taking OLO over starts with an empty queue, so a chain of sentinels moves a setting no faster than one.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S102",
+     "lines": [
+      972,
+      972
+     ],
+     "quote": "- **A revoked maker's resting orders still fill.** Makers are asked when they rest or change an order, not when it fills; an order rested while admitted fills after the policy stops admitting its maker, until the maker cancels it. Accepted: asking each maker at fill time would cost a call per maker and change the take walk.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S103",
+     "lines": [
+      980,
+      980
+     ],
+     "quote": "- **The owner has no power over admissions.** The policy is fixed for good at listing; there is no emergency switch or replacement. Traders of a proprietary market trust its lister and any proxy behind its policy. The policy can stop making and taking, never an exit.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S104",
+     "lines": [
+      981,
+      981
+     ],
+     "quote": "- **A failing policy refuses.** A revert, out of gas, a short answer or any answer but true is `NotAdmitted`; the market’s callers pay the policy’s gas (about +8k per asked entry with a one-read policy, plus any proxy hop).",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S105",
+     "lines": [
+      982,
+      982
+     ],
+     "quote": "- **Policies may see OLO mid-call.** OLO may be in the middle of an entry (a multicall writes its accounts at the end) when it asks, <span style=\"color:#065f49\">and inside a flash’s callback the caller’s account still holds the credit,</span> so a policy must decide on its own state.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S106",
+     "lines": [
+      983,
+      983
+     ],
+     "quote": "- **A stopped lister’s markets trade on.** Removing a lister stops new listings only.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S107",
+     "lines": [
+      984,
+      984
+     ],
+     "quote": "- **First proprietary listing of a parameter set wins.** The same parameters list once as proprietary (`MarketExists` for any later lister); an open market of the same parameters is a separate market.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S108",
+     "lines": [
+      985,
+      985
+     ],
+     "quote": "- **Open markets pay for the check.** +23 to +59 gas a call for the bit test (0 for cancel, claim, deposit, withdraw).",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S109",
+     "lines": [
+      986,
+      986
+     ],
+     "quote": "- <span style=\"color:#065f49\">**A broken policy leaves a dead market.** A policy at a wrong address, or one that refuses everyone, leaves a market nobody can make or take in, and its parameters stay listed (`MarketExists`). The listing does not call the policy; the lister lists again with one parameter changed (for example minQuote plus or minus 1).</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S110",
+     "lines": [
+      990,
+      990
+     ],
+     "quote": "- `PriceGrid.snap(MAX_TICK, spacing, true)` rounds up past the grid for spacing > 1; front ends snap down there.",
+     "dimensions": {
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S111",
+     "lines": [
+      991,
+      991
+     ],
+     "quote": "- Makers cannot rest below tick 3,600,000 (P = 10^-34 quote wei per base wei) by design.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S112",
+     "lines": [
+      997,
+      997
+     ],
+     "quote": "- <span style=\"color:#065f49\">A `takeThenRest` naming a key no market has, whose minQuote field is above what is left, fills nothing, rests nothing and returns zeros rather than `UnknownMarket`: the market is checked when a rest is placed.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S113",
+     "lines": [
+      998,
+      998
+     ],
+     "quote": "- <span style=\"color:#065f49\">`_eventWord` reads an order’s q with the pool word’s 7-bit mask into the event’s 5-bit field, which no q (at most 25) passes.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S114",
+     "lines": [
+      999,
+      999
+     ],
+     "quote": "- <span style=\"color:#065f49\">`warmPool`’s positions are 32 bits: a range past 2^32 - 1 goes on from 0.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S115",
+     "lines": [
+      1000,
+      1000
+     ],
+     "quote": "- <span style=\"color:#065f49\">The first owner (the deployer) logs no event: `OwnerSet` logs `acceptOwnership` only.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S116",
+     "lines": [
+      1001,
+      1001
+     ],
+     "quote": "- <span style=\"color:#065f49\">A multicall of a header alone logs `Ops`, and a DEPOSIT or WITHDRAW of 0 takes one of the run’s four token entries, moving nothing.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S117",
+     "lines": [
+      1009,
+      1009
+     ],
+     "quote": "- <span style=\"color:#025c45\">`collectFees` of an empty pot writes the pot's word (USED) and logs `FeesCollected` with 0.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S118",
+     "lines": [
+      1013,
+      1013
+     ],
+     "quote": "Tests in `docs/ASSEMBLY.md` are not considered known issues.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "scope": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S119",
+     "lines": [
+      1017,
+      1017
+     ],
+     "quote": "- `collectFees` is permissionless; funds can only go to `feeRecipient`.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S120",
+     "lines": [
+      1018,
+      1018
+     ],
+     "quote": "- Calling `OloBookExt` directly is harmless <span style=\"color:#025c45\">to OLO: it runs on the extension's own storage (owner zero; tokens and markets only if someone lists there), never OLO's. A flash there calls back from the extension's address, so a callback checks for the OloBook it expects.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S121",
+     "lines": [
+      1019,
+      1019
+     ],
+     "quote": "- Multicall `DEPOSIT` / `WITHDRAW` emit no `Deposit` / `Withdraw` events.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S122",
+     "lines": [
+      1020,
+      1020
+     ],
+     "quote": "- <span style=\"color:#025c45\">The flash is free and lends whatever OLO holds of a token (orders' escrow, every account, the fee pot); the debit of the caller's account is the only repayment.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S123",
+     "lines": [
+      1021,
+      1021
+     ],
+     "quote": "- <span style=\"color:#025c45\">A batch slot holds bids and asks; each sub-order carries its own side bit.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S124",
+     "lines": [
+      1022,
+      1022
+     ],
+     "quote": "- <span style=\"color:#025c45\">Fees and floors may go up to 100%: the cap is the whole quote, and market fees are the listers' choice.</span>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S125",
+     "lines": [
+      1074,
+      1074
+     ],
+     "quote": "Eight of the eleven topic groups apply. Not applicable: A.2 share tokens (no share or receipt token), A.4 lending, A.5 cross-chain.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S126",
+     "lines": [
+      1084,
+      1096
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Accrual model</td><td>No index. A take holds the whole fee; each order's fee is computed at the maker's settle as floor(filled x P x feePpm / 10^6) at its version's fee, and split at its version's share</td></tr>\n<tr><td>Zero weight</td><td>n/a. At share 0 the pot gets the whole fee; at 10,000 the maker does and the pot is not written</td></tr>\n<tr><td>Rounding</td><td>In OLO's favour: in rounded up, out rounded down; maker part floored; the remainder stays in OLO, nobody's</td></tr>\n<tr><td>Position changes</td><td>Fills settle on cancel, claim, modify and batch operations. A pool position goes dead (reusable by anyone) when its order is cancelled, or claimed once filled whole; a partial claim or a modify keeps it with its maker. A fee or share change never reaches a resting order</td></tr>\n<tr><td>Custody</td><td>Fees sit in OLO until settle (maker part) and until collectFees (pot)</td></tr>\n<tr><td>Solvency invariant</td><td>OLO's holding ≥ accounts + pots + every live order's payout, outside a flash's callback (inside it the caller's account holds the credit until the debit); held by test/OloInvariant.t.sol over 5 markets and tokens of 0, 6, 8, 18, 24 decimals, with flashes among the handler's actions</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S127",
+     "lines": [
+      1101,
+      1109
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Invariant checked</td><td>No AMM invariant. Each fill is at the order's own<br />tick and at or better than the entry's tick (_worse)</td></tr>\n<tr><td>Fee mechanics</td><td>Static per version (in C), 0-1,000,000 ppm (100%);<br />changed only by a new version; floors bind listings<br />only; ± 1% per owner call, one change per delay</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S128",
+     "lines": [
+      1111,
+      1111
+     ],
+     "quote": "Page 38 of 42",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S129",
+     "lines": [
+      1117,
+      1126
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Slippage / limits</td><td>Per-entry tick (a ladder: each entry the price seen<br />at the next, the taker’s limit last), FOK tolerance,<br />returned amounts; no whole-take output bound in<br />core (should be in router)</td></tr>\n<tr><td>Extreme values</td><td>Sum checked below 2^235 after every fill in<br />another decade (AmountOverflow past it) and<br />below 2^236 overall once same-decade adds are<br />counted; makers’ floor tick 3,600,000; amounts<br />below 2^112 base wei</td></tr>\n<tr><td>Spot price as oracle</td><td>Never; OLO reads no price from anywhere</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S130",
+     "lines": [
+      1130,
+      1140
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Who executes</td><td>The OloSentinel admin (a Safe) schedules and<br />executes; a guardian (an EOA) can cancel</td></tr>\n<tr><td>Delay</td><td>1-30 days (no default in the contract; 1 day set at<br />the production deploy); an op runs from its eta to<br />eta + 7 days</td></tr>\n<tr><td>Rate</td><td>One pending op per setting; a market's fee and the<br />global floor move ≤ 1% per delay</td></tr>\n<tr><td>Visibility</td><td>Every op is logged in full in Scheduled(key, eta,<br />op)</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S131",
+     "lines": [
+      1144,
+      1152
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Ordering</td><td>No global order; one live op per key; ops of<br />different keys run in any order</td></tr>\n<tr><td>Processing</td><td>Admin only, from eta to eta + 7 days, within the<br />stretch of ownership the op was scheduled in; an<br />expired or stale op never runs and frees its key</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S132",
+     "lines": [
+      1154,
+      1154
+     ],
+     "quote": "Page 39 of 42",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S133",
+     "lines": [
+      1160,
+      1168
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Checks</td><td>Strict decoding at schedule; everything else is<br />checked by the target (OLO, or the sentinel for its<br />own settings) when the op runs, and a revert<br />leaves every op scheduled</td></tr>\n<tr><td>Cancellation</td><td>The admin cancels any op; the guardian any op<br />except a guardian change</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S134",
+     "lines": [
+      1173,
+      1184
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Custody between transactions</td><td>Balances persist in accounts by design; nothing is<br />held for a caller outside its own accounts and<br />orders</td></tr>\n<tr><td>msg.value</td><td>listMarketQuote and<br />listMarketQuoteProprietary are payable (exact<br />listing fee); no receive or fallback</td></tr>\n<tr><td>Arbitrary calls</td><td>None: calls go only to listed token contracts, the<br />fee recipient (native), the extension, a proprietary<br />market’s policy (static call, its answer only read),<br />and a flash’s caller (oloFlashCallback on<br />msg.sender only, with the lock open)</td></tr>\n<tr><td>Recipients</td><td>All settlement is to msg.sender, except<br />withdrawTo(to) (not zero, not OLO itself) and<br />collectFees (always feeRecipient)</td></tr>\n<tr><td>Cross-user effects</td><td>Accounts and batch slots are keyed by owner; a<br />pool position’s slot is keccak256(C | pos | 0x01),<br />with the maker stored in the order word, so only<br />that maker can act on the order; a multicall settles<br />only the caller’s accounts (≤ 4 tokens)</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S135",
+     "lines": [
+      1186,
+      1186
+     ],
+     "quote": "Page 40 of 42",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S136",
+     "lines": [
+      1190,
+      1190
+     ],
+     "quote": "Context Doc",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S137",
+     "lines": [
+      1194,
+      1203
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Registration</td><td>Only owner-allowed listers, one policy per<br />proprietary market, named at listing and fixed for<br />good; no global policy</td></tr>\n<tr><td>Containment</td><td>A policy is asked only for its own market (the<br />market id and bit 170 select it); it can refuse making<br />and taking there, never an exit, and cannot write<br />OLO’s state (static call)</td></tr>\n<tr><td>Failure handling</td><td>A revert, out of gas, a short answer or any answer<br />but true refuses the entry ( NotAdmitted ); nothing<br />else is caught, so the policy’s gas is the caller’s</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "decisive",
+       "fails": []
+      }
+     }
+    },
+    {
+     "id": "S138",
+     "lines": [
+      1208,
+      1217
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Fee or share change</td><td>A new version in place (same id and K). Older<br />versions fill at their fee, settle at their share, cancel<br />and claim, but rest nothing new; makers cancel<br />there and re-place under K</td></tr>\n<tr><td>Other parameter changes</td><td>List a new market; makers move manually (cancel<br />and re-place); balances stay (accounts are per<br />token)</td></tr>\n<tr><td>Upgrades</td><td>None; OLO, its extension and the sentinel are<br />immutable.</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S139",
+     "lines": [
+      1222,
+      1230
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Who lists</td><td>Anyone, paying the exact listing fee (0 until set)</td></tr>\n<tr><td>Token registry</td><td>Tokens are registered only by listings; ids up to<br />2^32 - 1 (TokenRegistryFull); deposits need a<br />registered token</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S140",
+     "lines": [
+      1232,
+      1232
+     ],
+     "quote": "Page 41 of 42",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S141",
+     "lines": [
+      1238,
+      1247
+     ],
+     "quote": "<table>\n<thead>\n<tr><th>Topic</th><th>OLO</th></tr>\n</thead>\n<tbody>\n<tr><td>Gating</td><td>Resting entries need exactly K (or, in a multicall, a header carrying the current C) and rest in the current version (registry); re-rests need the current C; takes and single-call cancels and claims read no registry word</td></tr>\n<tr><td>Revocation</td><td>No delisting. A new version closes older versions to new orders only</td></tr>\n<tr><td>Proprietary listers</td><td>An owner-kept allow-list (setProprietaryListingAllowed, a sentinel op); a stopped lister lists no more, its markets trade on</td></tr>\n</tbody>\n</table>",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    },
+    {
+     "id": "S142",
+     "lines": [
+      1249,
+      1249
+     ],
+     "quote": "Page 42 of 42",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/sentinel/IOloSentinel.sol",
+   "statements": [
+    {
+     "id": "S143",
+     "lines": [
+      53,
+      54
+     ],
+     "quote": "@notice The caller may not cancel: neither the admin nor the guardian, or the guardian and the op a guardian change.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S144",
+     "lines": [
+      76,
+      76
+     ],
+     "quote": "@notice The sentinel does not own the OLO EVM contract: it schedules nothing until it has accepted it.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S145",
+     "lines": [
+      117,
+      118
+     ],
+     "quote": "@notice An op only (NotSelf). Sets the guardian; zero: none. The guardian cannot cancel this op. @param newGuardian The guardian",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/sentinel/OloSentinel.sol",
+   "statements": [
+    {
+     "id": "S146",
+     "lines": [
+      9,
+      11
+     ],
+     "quote": "@title OloSentinel: an OloBook's owner, every owner call behind a delay @notice See IOloSentinel. The OLO EVM contract is unchanged: the sentinel is its owner, so the OLO EVM contract's owner calls are the sentinel's ops. The admin is meant to be a multisig, the guardian another one, of other signers.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S147",
+     "lines": [
+      126,
+      126
+     ],
+     "quote": "a guardian change is the admin's to cancel alone: the guardian cannot hold its own replacement off",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/OloBook.sol",
+   "statements": [
+    {
+     "id": "S148",
+     "lines": [
+      177,
+      178
+     ],
+     "quote": "a proprietary market's policy admits the maker; the version the order rests in, the key and the tag the params carry, which must be the current one (`_modifyEntry`)",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S149",
+     "lines": [
+      280,
+      285
+     ],
+     "quote": "---------------------------------------------------------------- batches A maker's batch slot holds up to four sub-orders, bids, asks or both, in two words, every one on chain: the main word (ticks, q, open units and each sub-order's absolute side) and the settlement word (bases). Batch slots are the maker's own, keyed by (C, maker, slot): only the maker rests, modifies, cancels or claims there, and nobody else can take the slot or exhaust it (a take writes the main word, filling sub-orders as it does pool orders), so a maker names a fixed slot per group of orders (0 for one) and works on it in place.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S150",
+     "lines": [
+      438,
+      438
+     ],
+     "quote": "OP_MODIFY: the one code left, as `multicall` refused every code OP_LENGTHS gives no length",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/OloBookExt.sol",
+   "statements": [
+    {
+     "id": "S151",
+     "lines": [
+      26,
+      32
+     ],
+     "quote": "@title OloBookExt @notice Delegatecall extension of OloBook holding the cold entries: listing, admin, pre-warming and flash. It is meant to run in the OLO EVM contract's storage only. Called directly it acts on its own storage, which the contract never reads: its owner is zero, so the admin entries revert; listMarketQuote and warmPool write its own slots, harmlessly; collectFees(address(0)) sends any native coin forced into it to its fee recipient, which is zero; and flash finds no token in its own registry (unless one was listed there) and would call back from its own address, which a callback that checks the OLO EVM contract's refuses.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S152",
+     "lines": [
+      62,
+      62
+     ],
+     "quote": "the market's policy, for good: no entry changes it (a lister upgrades its rules behind its own address)",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S153",
+     "lines": [
+      104,
+      104
+     ],
+     "quote": "a token against itself is refused, by the ids in C",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/OloTypes.sol",
+   "statements": [
+    {
+     "id": "S154",
+     "lines": [
+      93,
+      95
+     ],
+     "quote": "@notice The storage slot of `maker`'s batch slot `slot` of market C: keccak256(C | maker 20 | slot u16 | 0x02). Batch slots are the maker's own: only its operations rest, move or settle orders there (a take writes the main word, filling them), so none can be taken or exhausted by anyone else.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S155",
+     "lines": [
+      117,
+      119
+     ],
+     "quote": "@notice The key of `owner`'s account of token `key` in the accounts mapping: owner 160 | tokenId 32. Every owner has its own account of each token, so nobody can open, take or squat another's; owner 0's account of a token is the protocol's fee pot.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/base/OloBookAssets.sol",
+   "statements": [
+    {
+     "id": "S156",
+     "lines": [
+      22,
+      24
+     ],
+     "quote": "@notice A token a listing registered, and an amount from 1 to 2^128 - 1: only listings add tokens, so deposits cannot fill the token registry, and no owner's account holds more than 2^128 - 1 (an amount above it is refused before the pull). The fee pot holds more (`_creditPot`).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/base/OloBookBatches.sol",
+   "statements": [
+    {
+     "id": "S157",
+     "lines": [
+      351,
+      352
+     ],
+     "quote": "(an order of tick 0 and no amount would leave the index empty with its base rewritten; it never stands: on an empty sub-order it is BAD_SAME, on a live one BAD_TICK)",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/base/OloBookTakes.sol",
+   "statements": [
+    {
+     "id": "S158",
+     "lines": [
+      32,
+      94
+     ],
+     "quote": "@title OloBookTakes @notice A take: its state (`Walk`), the walk of the list's segments, the position segment's loop, the exact quote's sum, the quote-mode budget, the one rounding at the end, and the Take event built from the fills as they happen; the two segment loops side by side (`_fillList` over pool words, `_fillBatches` over batch slots). The taker's settlement is OloBookAssets'. The money of a take, hard parts first. 1. The exact quote. Every fill is x whole units of 10^q base wei at its order's own tick, worth x x 10^q x mantissa x 10^(d - 43) quote wei (PriceGrid). The walk keeps the exact sum of its fills as one integer `sum` aligned to the lowest decade `low` it has met: the quote is Q = sum x 10^(low - 43), a fraction when low < 43. A fill in the sum's decade adds amount x mantissa; one in a higher decade adds that times 10^(d - low); one in a lower decade first scales the sum up by 10^(low - d) (`_accrue`). Nothing is rounded until the walk ends. 2. The one rounding (`_finishTake`). A buy pays ceil(Q), a sell receives floor(Q); the fee is ceil(Q x feePpm 10^6) either way. So the OLO EVM contract never pays out a fraction it did not take in, and a take costs at most one wei of rounding on the quote and one on the fee, however many orders it filled. 3. The sum's bounds. The adds in the sum's decade are amount x mantissa, unchecked, and total below 2^159: a base mode take fills at most its amount, below 2^112, so they total below 2^132; a quote-mode take has no base cap, but it fills at most the open amounts of the distinct orders its list names, each below 2^114 (2^30 units of up to 10^25 wei), and a list names fewer than 2^25 (its calldata, at 4 gas a byte, fits in no block otherwise), so below 2^139 base wei and adds below 2^159. `_accrue` (and `_affordable` before it scales) holds the sum below SUM_LIMIT = 2^235 after every add in another decade, reverting AmountOverflow past it, so the sum never reaches 2^236 and sum x feePpm stays below 2^256 (feePpm at most 10^6 < 2^20). The sum is the quote at its alignment, S = Q x 10^(43 - low), so the limit is on the quote: a take reverts AmountOverflow only when Q x 10^(43 - low) reaches 2^235 at the lowest decade low it has reached (in quote mode a lower decade counts once the walk reaches an order there, before it is priced). Makers rest at decade 4 or above (PriceGrid.MIN_MAKER_TICK) and fills are at makers' ticks, so low >= 4 and a take worth less than 2^235 / 10^39, about 5.52e31 quote wei, never reverts so. Above it a listed order its maker repriced down to decade 4 can revert the caller's take: a denial of that take, never of funds (a known issue, accepted). 4. Quote mode (TAKE_QUOTE): the amount A is quote wei, and the walk fills, order by order, the most whole units the budget still affords at each order's price. With f = feePpm / 10^6 the budget is a bound Q <= Q* on the exact quote, Q* = N / Y (`_quoteBudget`): a buy pays g(Q) = ceil(Q) + ceil(Q x f), which grows with Q, so the most it may fill is the largest Q with g(Q) <= A. With n1 = floor(A / (1 + f)): any Q <= n1 passes (n1 (1 + f) <= A, so ceil(n1 f) <= A - n1); a Q in (n1, n1 + 1] has ceil(Q) = n1 + 1 and passes while Q f <= A - n1 - 1; past n1 + 1 none does ((n1 + 1)(1 + f) > A). So Q* = max(n1, (A - n1 - 1) / f), and Q* = A when f is 0: exact, nothing held back. a sell receives floor(Q) - ceil(Q x f) <= Q x (1 - f), so Q* = A / (1 - f) keeps it within A. (What a sell receives does not grow monotonically with Q, by a wei here and there, so the bound is on the exact value; it is sufficient, not tight: a unit whose rounded proceeds would reach A exactly can put Q past Q*, and the walk stops short of it, within the bound below, less than c x (1 - f) + 2.) At a fee of 100% a sell receives nothing whatever it fills, and any fill reverts it SellBelowFee at the end; its budget is A x 10^6, as at 1 ppm below (Y = 1). Q* is exact, a fraction, and a sell's grows as the fee nears 100%, to A x 10^6 (below 2^132). The walk refuses a budget whose whole part floor(Q*) passes 2^126: AmountOverflow (`_quoteCap`), at the first order the walk reaches that is open, on the other side and within its entry's tick, before it prices a unit there, so a list it could not fill reverts too. Only a fee of 999,939 ppm or more reaches it (A below 2^112), and at or below 2^126 every cap fits 256 bits. In the sum's terms Q* is a cap on `sum` at its alignment: sum <= cap(low) = floor(N x 10^(43 - low) / Y) (`_quoteCap`), exact integers. Per order, x = min(open, floor((cap - sum) / (a unit's quote in the sum's terms))): the most units the cap still holds. A lower decade re-aligns the cap too, and cap(d) >= cap(low) x 10^(low - d) (a floor of a larger multiple), so the sum, scaled with it, stays within it. Where the walk stops short at an order with units left, one more unit c there would have passed the bound, so what is left of A is less than c x (1 + f) + 1 for a buy (g(Q + c) >= A + 1 and g(Q + c) < (Q + c)(1 + f) + 2) and c x (1 - f) + 2 for a sell below a fee of 100% (the two roundings down; at 100% a sell that fills reverts). The walk does not stop early in quote mode: a later entry can always be a unit cheap enough to fill, so it reads every entry of its list; list what is needed and a few spares. The loops tell quote mode by `remaining` alone: it starts at 2^256 - 1 there (no base cap), which no base mode amount (below 2^112) reaches and no quote-mode take fills down to (note 3), so remaining > 2^112 - 1 is quote mode. A flag of its own would take a stack slot the loops do not have, and cost every base-mode fill about 36 gas.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S159",
+     "lines": [
+      569,
+      569
+     ],
+     "quote": "the exact quote: in the sum's decade added here (unchecked: note 3), else `_accrue`",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S160",
+     "lines": [
+      666,
+      666
+     ],
+     "quote": "the exact quote: in the sum's decade added here (unchecked: note 3), else `_accrue`",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/interfaces/IOloBookExt.sol",
+   "statements": [
+    {
+     "id": "S161",
+     "lines": [
+      177,
+      179
+     ],
+     "quote": "@notice Owner only. Sets the wallet `collectFees` pays. @param newFeeRecipient The new fee recipient, not zero and not the contract (BadAddress: a collection into the contract would zero the pot and strand it)",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/interfaces/IOloFlashCallback.sol",
+   "statements": [
+    {
+     "id": "S162",
+     "lines": [
+      5,
+      12
+     ],
+     "quote": "@title What the caller of a flash answers @notice `IOloBookExt.flash` credits the caller's account in the OLO EVM contract, calls this function on the caller, and debits the account by as much once it returns: unless the account holds the amount again by then, the flash reverts whole, the callback's work with it. The OLO EVM contract is unlocked for the callback, so the callback may call any of its entries (a take, a place, a withdrawal, a deposit, another flash), each settling on the caller's accounts as it would outside a flash. A token transferred to the OLO EVM contract directly repays nothing: only the account is debited. The OLO EVM contract calls it back only on the address that called `flash`: nobody can start a flash that calls another contract back, so a callback checks only that msg.sender is the OLO EVM contract it trusts.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/src/libraries/PriceGrid.sol",
+   "statements": [
+    {
+     "id": "S163",
+     "lines": [
+      30,
+      30
+     ],
+     "quote": "@notice Ticks start at 1: tick 0 stays unused, so a zero tick is never a live price.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/README.md",
+   "statements": [
+    {
+     "id": "S164",
+     "lines": [
+      99,
+      100
+     ],
+     "quote": "- [docs/LINT.md](docs/LINT.md): the `forge lint src` and `forge lint sentinel` triage: every warning class, and why\nnone calls for a change",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+   "statements": [
+    {
+     "id": "S165",
+     "lines": [
+      3,
+      9
+     ],
+     "quote": "Every inline assembly block of the OLO EVM contract, one row each, for audit: what it does, why it is assembly, what it\nrelies on, what memory it touches, and what holds it: 10 blocks, 41 lines of about 3,500 (1%). The rule: **assembly\ndecides nothing about money.** Pricing, fills, fees and their rounding, the state words, the take list walk and the\nledger are Solidity; assembly stays where it has a one-line contract Solidity cannot express (a raw storage slot, a\nstorage variable's slot number, a proxy forward, a word into `bytes` at an offset, a word out of calldata `bytes` with\nno bounds check of its own) or where the Solidity form costs a hash's worth on every operation (the three slot preimages\nover the scratch space).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S166",
+     "lines": [
+      62,
+      62
+     ],
+     "quote": "Not applicable to OloAsmMemory: `_delegate` never returns to Solidity.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S167",
+     "lines": [
+      96,
+      96
+     ],
+     "quote": "| S2 debit check dropped | an overdraft wraps | `testFuzz_ledger_vs_reference`, `test_accounts`, `test_subs_extreme_parameters` |",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S168",
+     "lines": [
+      99,
+      99
+     ],
+     "quote": "| S5 overflow check dropped | a balance past 2^128 carries into unused bits | `test_amounts_stop_at_2_128`, `test_pot_holds_a_fee_past_an_account` |",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S169",
+     "lines": [
+      100,
+      100
+     ],
+     "quote": "| S6 the zero-flow guard dropped | a zero flow rewrites the word | equivalent: no caller passes a zero flow (`_commit` guards `credit != 0`, an escrow is at least 1, a deposit refuses 0); the only effect would be USED on an untouched account |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S170",
+     "lines": [
+      102,
+      102
+     ],
+     "quote": "| S8 a fifth entry allowed | an index past the array (a panic) | the reference fuzz, the four-accounts test, `test_multicall_ledger_holds_four_tokens` |",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S171",
+     "lines": [
+      106,
+      106
+     ],
+     "quote": "| S12 `_commit` wallet write-back dropped | pushes ignore the maker flow | the models (46 tests) |",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S172",
+     "lines": [
+      119,
+      119
+     ],
+     "quote": "| M1 the segment header check dropped (`cursor + 3 > list.length`) | nothing: a header past the list ends past it too, and the segment's end check (`segEnd > list.length`) reverts BadTakeList the same | equivalent |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S173",
+     "lines": [
+      121,
+      121
+     ],
+     "quote": "| M3 whole position entries not required | a last entry's missing bytes read from what follows | `test_take_list_malformed`, `test_take_bad_list_refused_under_junk`, `test_take_skips_dead_wrong_side_and_repriced` |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S174",
+     "lines": [
+      122,
+      122
+     ],
+     "quote": "| M4 the group header check dropped (`cursor + 23 > groups.length`) | nothing: a header past the segment has its ticks' end past it too (or a mask of 0 or past 15), and both revert BadTakeList the same | equivalent |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "path": "limitorder-org__v1-core/docs/LINT.md",
+   "statements": [
+    {
+     "id": "S175",
+     "lines": [
+      3,
+      6
+     ],
+     "quote": "`forge lint src`, forge 1.8.5 (51a52c5): 182 warnings, none of which calls for a code change.\nEach is a pattern the code uses on purpose, a value with a bound the code enforces (and a test holds), or a false\npositive. This page says which, by rule and by function: line numbers move with every edit, so rerun the command\nafter a change and read new warnings against these classes.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S176",
+     "lines": [
+      10,
+      10
+     ],
+     "quote": "| unsafe-typecast | 103 | intentional or bounded: see below |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S177",
+     "lines": [
+      11,
+      11
+     ],
+     "quote": "| require-revert-in-loop | 38 | by design: invalid input in a parse, fill or settle loop reverts the call |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S178",
+     "lines": [
+      13,
+      13
+     ],
+     "quote": "| reentrancy-events | 10 | false positive: no external call before the event |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S179",
+     "lines": [
+      14,
+      14
+     ],
+     "quote": "| reentrancy-events | 1 | by design: `Flash` logs a flash once its callback has returned and the credit is debited back |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S180",
+     "lines": [
+      15,
+      15
+     ],
+     "quote": "| reentrancy-no-eth | 1 | by design: a flash's debit, the repayment, follows its callback, which runs with the lock open on purpose |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S181",
+     "lines": [
+      16,
+      16
+     ],
+     "quote": "| uninitialized-local | 10 | false positive: a cursor or counter from 0, 0 as the value meant, or a read only on the path that assigns |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S182",
+     "lines": [
+      17,
+      17
+     ],
+     "quote": "| divide-before-multiply | 3 | intended: a floor the code takes on purpose (whole units, quote mode's n1) |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S183",
+     "lines": [
+      18,
+      18
+     ],
+     "quote": "| divide-before-multiply | 1 | exact: a quotient and remainder split (quote mode's cap) |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S184",
+     "lines": [
+      19,
+      19
+     ],
+     "quote": "| calls-loop | 4 | bounded: a multicall's commit moves at most four tokens |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S185",
+     "lines": [
+      20,
+      20
+     ],
+     "quote": "| calls-loop | 1 | by design: a multicall run's first PLACE or MODIFY in a proprietary market asks its policy, a static call, once a run |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S186",
+     "lines": [
+      21,
+      21
+     ],
+     "quote": "| incorrect-strict-equality | 1 | by design: a pull must deliver exactly the amount credited |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S187",
+     "lines": [
+      22,
+      22
+     ],
+     "quote": "| missing-zero-check | 1 | by design: `transferOwnership(address(0))` withdraws a pending proposal |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S188",
+     "lines": [
+      23,
+      23
+     ],
+     "quote": "| missing-zero-check | 1 | false positive: the constructor's fee recipient is checked in `_setFeeRecipient`, the extension by its code |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S189",
+     "lines": [
+      24,
+      24
+     ],
+     "quote": "| missing-events-access-control | 1 | false positive: `setProprietaryListingAllowed` logs ProprietaryListerSet on the line after its write |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S190",
+     "lines": [
+      28,
+      28
+     ],
+     "quote": "| class | count | why it is safe |",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S191",
+     "lines": [
+      30,
+      30
+     ],
+     "quote": "| a field read from a packed word | 40 | the truncation is the field's width: the entries' params words (the settle flags `lockIf` reads and the entries check, a place's position, a cancel's, claim's and modify's position, a take's and a takeThenRest's mode, the rest's position and probes, `manageBatchSubs`'s flags and slot, `_newWalk`'s mode), a multicall op word (a PLACE's tick, side byte, amount and position, the position `multicall` compares with where the PLACE landed, a CANCEL's, CLAIM's or MODIFY's position, a MODIFY's new tick and amount, a DEPOSIT's or WITHDRAW's token id and 128-bit amount), C's fields (`MarketLib`: the token ids, the spacing, the fee, the maker share, the version, the id), the market key the Take and PoolWarmed events carry (C's top 48 bits, `uint48(c.marketKey())`) and the pool word's owner (`PoolLib.ownerOf`). An op's ticks are 4-byte fields that `makerTick` checks before use (MIN_MAKER_TICK .. MAX_TICK, on the spacing), and its amounts 14-byte fields, the OLO EVM contract's 112-bit input bound |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S192",
+     "lines": [
+      31,
+      31
+     ],
+     "quote": "| a take list's fields | 8 | the list's layout, read from the calldata word by `bytes1` .. `bytes20` casts (its top bytes): a segment header's kind (1 byte) and length (2) in `_fillSegments`, a position entry's position (4) and tick (4) in `_fillList`, a group's maker (20), slot (2) and mask (1) and each named sub-order's tick (4) in `_fillBatches`. An entry's tick is only compared with the order's (`_worse`), so any 32-bit value is safe |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S193",
+     "lines": [
+      33,
+      33
+     ],
+     "quote": "| an amount made signed, or a signed sum made unsigned | 28 | every such amount is far below 2^255 (the bounds below): the order operations' flows, `_batchFlows`' sums, a multicall PLACE's escrow, a DEPOSIT's or WITHDRAW's 128-bit amount, `_moveAccount`'s and `_settleFlow`'s `uint256(flow)` and `uint256(-flow)`, `_commit`'s and `_creditAfter`'s sums |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S194",
+     "lines": [
+      46,
+      49
+     ],
+     "quote": "- `int256(quoteAmt)` and `int256(baseAmt)` in `_cancelOp` and `_claimOp`, and the seven casts of `_modifyOp`\n(`int256(proceeds)`, `int256(proceeds + fee)`, a kept bid's `int256(fee)`, a bid's old refund plus the maker's part\nof the fee and its new escrow, an ask's old and new open amounts): a quote flow is proceeds or a refund plus at most\nthe fee (the maker's part, `_splitFee`), below 2^235; a base flow is below 2^114; each difference is of two such.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S195",
+     "lines": [
+      52,
+      53
+     ],
+     "quote": "- `int256(escrow)` in `_marketOp` (a multicall PLACE): an ask's amount, below 2^114, or a bid's quote rounded up, below\n2^234.",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S196",
+     "lines": [
+      57,
+      65
+     ],
+     "quote": "- `uint256(-makerFlow)`, `int256(fromCredit)`, `int256(need - fromCredit)`, `uint256(-wallet)` and\n`uint256(entry.wallet)` in `_commit`, and `uint256(credit)` and `uint256(-credit)` in `_creditAfter`: sums of a\nmulticall's flows. The ledger adds them with checked arithmetic (the PLACE's escrow, `_ledgerFlows`, `_ledgerAdd`),\nso a sum past the int256 range reverts the call; `_commit`'s unchecked block adds the orders' net flow to the DEPOSIT\nand WITHDRAW sums and negates a negative one. The net flow of a token is below 2^235 per order the call touches (ops\nrepeated on one order net out, give or take a wei of rounding each: a refund rounds down, an escrow up), and the\nDEPOSIT and WITHDRAW sums are below 2^128 per op. Each order touched is a storage word read and written, about\n5,000 gas, so a sum would reach 2^254 only in a call of 2^19 orders, over 2 x 10^9 gas: no sum of two wraps, and no\nnegation meets `type(int256).min`. `testFuzz_ledger_vs_reference` holds the ledger's netting to a reference.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S197",
+     "lines": [
+      83,
+      92
+     ],
+     "quote": "The other 10 make no external call before the event: `MarketListed` (`listMarketQuote`, which takes the listing fee as\n`msg.value` and reads a token's code size but calls nothing), `ProprietaryMarketListed` (`listMarketQuoteProprietary`,\nthe same, and the policy's code size, after the listing's own writes), `MarketConfigSet` (`_setVersion`, for\n`setMarketFee` and `setMarketMakerShare`), `PoolWarmed` (`_warmPool`), and the maker events, which come before the\noperation settles (`_settleFlows` follows them): `Claimed` and `Cancelled` (`cancel`), `Claimed` (`claim`), `Claimed`\nand `Modified` (`_modifyEntry`), and `BatchUpdated` (`_manageBatch`). The lint counts inline assembly as an external\ncall, through internal and library calls, and each of these functions runs OloSlots' slot hashes, loads or stores first,\nwhich call no other contract. The admin events of `setGlobalMakerShare`, `setPairMakerShare`, `_setGlobalFeeFloor`\n(`setGlobalFeeFloor`'s and the OLO EVM contract's constructor's), `setPairFeeFloor`, `setCurrentListingFee` and\n`_setFeeRecipient`, whose functions run no assembly, are not flagged.",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S198",
+     "lines": [
+      96,
+      103
+     ],
+     "quote": "`flash` calls its caller back (`IOloFlashCallback.oloFlashCallback`) between the credit and the debit, with the lock\nopen, so the callback may call any entry: that is what a flash is. After the call come the debit, `_debit` on the\ncaller's account (reentrancy-no-eth: `_accounts` written after an external call), and `Flash` (reentrancy-events).\nThe debit reads the account as the callback left it, fresh, and is the repayment; nothing read before the call is\nused after it but the token's id, the amount and the caller, which no callback changes. `Flash` comes after every event\nthe callback's calls logged, and only once the flash is repaid. A flash checks the lock first, so no token's callback\nduring another call's transfer can start one (`test_reentrancy_matrix`'s sixteenth entry); `IOloBookExt.flash` says\nwhat a flash lends and how it comes back.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S199",
+     "lines": [
+      107,
+      108
+     ],
+     "quote": "All four are in src/base/OloBookTakes.sol, and each is a floor the code takes on purpose or a division that is exact\nby construction: none drops precision the result needs.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S200",
+     "lines": [
+      134,
+      153
+     ],
+     "quote": "- **require-revert-in-loop (38).** Every check a loop can reach reverts the whole call. The multicall's op loop (22):\nthe stream's own checks (an op cut short or of an unknown code, a token id no listing registered, a market index past\nthe header: BadOp), the market's version (a header K resolved when the stream switches to it, `_current`:\nUnknownMarket; a header C checked current at its first PLACE or MODIFY, `_checkCurrent`: MarketFrozen or\nUnknownMarket), a proprietary market's policy at that first PLACE or MODIFY (`_admit`: NotAdmitted) and every check of\nthe ops it runs: a PLACE's tick (`_marketOp`), its flags and busy positions (SlotBusy, in `_placeOp`'s probe loop); a\nPLACE's or MODIFY's size (`_restAmount`); a CANCEL's, CLAIM's and MODIFY's order and owner, a CLAIM's fills and a\nMODIFY's tick and NoChange (`_cancelOp`, `_claimOp`, `_modifyOp`); a fifth token (`_entryOf`, TooManyTokens); and the\npot's bound (`_creditPot`, through `_splitFee`). `_commit`'s loops (4): an account's bound and balance (`_credit`,\n`_debit`, through `_moveAccount`), a short delivery (`_pull`, FeeOnTransfer) and a failed transfer (`SafeTransfer`,\nTransferFailed). A take's walk of its list (12): a segment past the list or of an unknown kind (`_fillSegments`), a\nposition segment of no whole number of entries (`_fillList`), a group past its segment or with a mask naming no\nsub-order or one past 3 (`_fillBatches`), the exact sum past its bound (`_accrue`, and `_affordable` before it\nscales: AmountOverflow, OloBookTakes' note 3), and a quote-mode sell's budget past 2^126 (`_quoteCap`: AmountOverflow,\nnote 4). That is the intent: there is no partial success to keep. A take reverts\nAmountOverflow only when its exact quote aligned to the lowest decade it reached, Q x 10^(43 - low), reaches 2^235;\nmakers rest at decade 4 or above, so a take worth less than 2^235 / 10^39, about 5.5e31 quote wei, never does\n(`test_a_reprice_to_the_floor_denies_only_takes_past_the_threshold`, `test_absurd_decades_overflow`); each of\n`_accrue`'s three bounds is the only one that stops a take of its own (`test_two_fills_past_the_sum_limit_revert`,\n`test_a_multiply_that_would_wrap_reverts`).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S201",
+     "lines": [
+      154,
+      160
+     ],
+     "quote": "- **uninitialized-local (10).** `takeThenRest`'s `c` (the rest's version), `escrow`, `landed` and `placed` are set\nonly when the rest is placed: `c`, `landed` and `placed` are read only then, and `escrow` 0 otherwise is the value\nmeant (no rest to fund); `set` in\n`_manageBatch` is read from storage, for a post or a replace, only when the slot holds a live sub-order, and 0\notherwise is the value meant (nothing to settle, and the settlement word is then always rewritten); `fee` in\n`_modifyOp` is set only when the order has fills, so 0 otherwise is the value meant; the loops' cursors and counter\n(`cursor` in `_fillSegments`, `_fillList` and `_fillBatches`, `i` in `_fillBatches`) start at 0.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S202",
+     "lines": [
+      161,
+      166
+     ],
+     "quote": "- **calls-loop (5).** `_commit` pulls and pays per ledger entry (`_pull`'s two `balanceOf` calls, `SafeTransfer`'s\n`transferFrom` and `transfer`), at most four tokens a multicall (TooManyTokens,\n`test_multicall_ledger_holds_four_tokens`). A token whose transfer fails reverts the caller's own call only. And\n`_admit`'s static call to a proprietary market's policy, at a run's first PLACE or MODIFY in that market (once a\nrun, `test_multicall_asks_once_a_run`): a policy that refuses or fails reverts the caller's own call; a static call\nchanges no state.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S203",
+     "lines": [
+      167,
+      170
+     ],
+     "quote": "- **incorrect-strict-equality (1).** `_pull` requires the OLO EVM contract's balance to grow by exactly the amount it\ncredits: less is a fee-on-transfer token (`test_token_transfers_that_fail`) or a rebasing token's rounding, and more\nis refused too (`test_a_token_that_delivers_more_than_asked_is_refused`). A token with transfer hooks could make a\ndeposit revert by sending the contract tokens mid-pull; that costs the depositor a retry and gains the sender nothing.",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S204",
+     "lines": [
+      171,
+      174
+     ],
+     "quote": "- **missing-events-access-control (1).** `setProprietaryListingAllowed` writes `canListProprietaryMarkets[lister]`,\nwhich `listMarketQuoteProprietary` checks, and logs ProprietaryListerSet(lister, allowed) on the next line; the lint\ndoes not see the event. `test_listing_refusals` and `test_a_removed_lister_s_market_trades_on` (OloProprietary)\nexpect it.",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S205",
+     "lines": [
+      175,
+      178
+     ],
+     "quote": "- **missing-zero-check (2).** `transferOwnership(address(0))` withdraws a pending proposal, as `IOwned2Step` says;\nownership moves only when the proposed owner accepts, so it cannot be lost to a zero address. The constructor's\naddresses are checked where the lint does not follow: the fee recipient in `_setFeeRecipient` (zero or the OLO EVM\ncontract: BadAddress), the extension by its code (zero has none: BadAddress).",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S206",
+     "lines": [
+      182,
+      182
+     ],
+     "quote": "The OLO EVM contract's owner (`sentinel/OloSentinel.sol`): 27 warnings, none of which calls for a code change.",
+     "dimensions": {
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S207",
+     "lines": [
+      186,
+      186
+     ],
+     "quote": "| require-revert-in-loop | 11 | by design: `schedule`, `execute` and `cancel` take a list, and one op or key that fails reverts the call whole, as `keyOf`'s decoding checks do inside it |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S208",
+     "lines": [
+      187,
+      187
+     ],
+     "quote": "| unsafe-typecast | 8 | bounded: `uint64(eta)` (eta is now plus a delay of at most 30 days), `uint64(block.timestamp)` twice (when an op was scheduled and when the stretch of ownership began: a time below 2^64), `bytes4(op)` and `bytes4(data)` (the selector, after `op.length >= 4`), a pair op's two `uint160` token words and a lister op's lister word (after `_requireBits(args, i, 160)`) |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      },
+      "known": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S209",
+     "lines": [
+      188,
+      188
+     ],
+     "quote": "| block-timestamp | 3 | by design: a timelock compares the time; a validator's leeway of seconds is nothing against a delay of a day or more |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S210",
+     "lines": [
+      189,
+      189
+     ],
+     "quote": "| missing-zero-check | 3 | by design: a guardian of zero is none (the constructor, `setGuardian`), and `transferAdmin(0)` withdraws a proposal |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S211",
+     "lines": [
+      190,
+      190
+     ],
+     "quote": "| calls-loop | 1 | by design: `execute` runs the admin's list, each op one call to the OLO EVM contract or to the sentinel itself |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    },
+    {
+     "id": "S212",
+     "lines": [
+      191,
+      191
+     ],
+     "quote": "| reentrancy-events | 1 | `Executed` after the op's call: the op is deleted before the call, the OLO EVM contract's owner entries call nothing outside it, and the sentinel's own settings call nothing, so no path re-enters with the op live |",
+     "dimensions": {
+      "true_finding": {
+       "level": "leans_accepted",
+       "fails": [
+        2,
+        4
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

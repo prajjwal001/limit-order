@@ -1,0 +1,1 @@
+**Scope of a file list.** The scope is the files listed for this repository in `context/scope.json`. A finding is in scope when its chain of logic and the bulk of its impact land in those files. The rest of the repository is context.

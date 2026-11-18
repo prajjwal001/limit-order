@@ -1,0 +1,12 @@
+# Compiler files
+cache/
+out/
+cache-hirun/
+out-hirun/
+cache-sentinel/
+out-sentinel/
+
+# Secrets
+.env
+.env.*
+!.env.example

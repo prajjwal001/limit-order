@@ -1,0 +1,42 @@
+{
+  "analysis_id": "af3cd49f-dcf3-4140-94a6-7f9e16ce905b",
+  "codebases": [
+    {
+      "branch": "main",
+      "commit_sha": "0f7ab6a141ac82f768702cfd9da0c72e61db6403",
+      "directory": "limitorder-org__v1-core",
+      "id": "e98804bd-497f-4dd2-a474-f3a5f7a79565",
+      "in_scope_files": [
+        "sentinel/IOloSentinel.sol",
+        "sentinel/OloSentinel.sol",
+        "src/OloBook.sol",
+        "src/OloBookExt.sol",
+        "src/OloTypes.sol",
+        "src/base/OloBookAssets.sol",
+        "src/base/OloBookBase.sol",
+        "src/base/OloBookBatches.sol",
+        "src/base/OloBookOrders.sol",
+        "src/base/OloBookStorage.sol",
+        "src/base/OloBookTakes.sol",
+        "src/base/Owned2Step.sol",
+        "src/interfaces/IERC20Minimal.sol",
+        "src/interfaces/IOloBook.sol",
+        "src/interfaces/IOloBookBase.sol",
+        "src/interfaces/IOloBookExt.sol",
+        "src/interfaces/IOloFlashCallback.sol",
+        "src/interfaces/IOloMarketPolicy.sol",
+        "src/interfaces/IOwned2Step.sol",
+        "src/interfaces/MarketWord.sol",
+        "src/interfaces/OloListings.sol",
+        "src/libraries/Flags.sol",
+        "src/libraries/OloMath.sol",
+        "src/libraries/PriceGrid.sol",
+        "src/libraries/SafeTransfer.sol",
+        "src/types/Market.sol"
+      ],
+      "repo_name": "limitorder-org/v1-core"
+    }
+  ],
+  "mode": "pinned",
+  "version": 2
+}

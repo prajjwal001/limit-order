@@ -1,0 +1,640 @@
+[
+  {
+    "id": "scope-manifest",
+    "path": "context/scope.json",
+    "dimensions": [
+      "scope"
+    ],
+    "description": "Pinned repository revision and selected file list.",
+    "written_for_engagement": true,
+    "level": "engagement",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/scope.json",
+        "location": "codebases[0]: directory, repo_name, branch, commit_sha, in_scope_files"
+      }
+    ]
+  },
+  {
+    "id": "scope-rule-v1-core",
+    "path": "context/scope-rules/limitorder-org__v1-core.md",
+    "dimensions": [
+      "scope"
+    ],
+    "description": "Sherlock file-list scope rule for limitorder-org/v1-core.",
+    "written_for_engagement": false,
+    "level": "platform",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/scope-rules/limitorder-org__v1-core.md",
+        "location": "Scope of a file list (entire document)"
+      }
+    ]
+  },
+  {
+    "id": "judging-guidelines",
+    "path": "context/judging-guidelines.md",
+    "dimensions": [
+      "tf",
+      "scope",
+      "known",
+      "severity"
+    ],
+    "description": "Selected Sherlock judging guidelines, duplication rules and Audit Engine mechanics.",
+    "written_for_engagement": false,
+    "level": "platform",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/judging-guidelines.md",
+        "location": "§§1–6 (entire document)"
+      }
+    ]
+  },
+  {
+    "id": "severity-set",
+    "path": "context/severity-set.json",
+    "dimensions": [
+      "severity"
+    ],
+    "description": "Ordered severity definitions with identifiers and complete criteria.",
+    "written_for_engagement": false,
+    "level": "platform",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/severity-set.json",
+        "location": "Array elements 0–4: identifier, display_name, body_markdown"
+      }
+    ]
+  },
+  {
+    "id": "severity-definitions-readable",
+    "path": "context/severities.md",
+    "dimensions": [
+      "severity"
+    ],
+    "description": "Supplied readable severity definitions with abbreviations and weights.",
+    "written_for_engagement": false,
+    "level": "platform",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/severities.md",
+        "location": "Critical, High, Medium, Low and Info (entire document)"
+      }
+    ]
+  },
+  {
+    "id": "finding-report-standard",
+    "path": "context/finding-report-standard.md",
+    "dimensions": [],
+    "description": "Platform guidance and examples for writing each finding field.",
+    "written_for_engagement": false,
+    "level": "platform",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/finding-report-standard.md",
+        "location": "Rules for all fields; Field guidance (entire document)"
+      }
+    ]
+  },
+  {
+    "id": "engagement-statements",
+    "path": "context/statements.json",
+    "dimensions": [
+      "tf",
+      "scope",
+      "known"
+    ],
+    "description": "Statement quotes, source locations and per-dimension levels for the engagement.",
+    "written_for_engagement": true,
+    "level": "engagement",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/statements.json",
+        "location": "files[0]–files[14], statements S1–S212"
+      }
+    ]
+  },
+  {
+    "id": "olo-audit-context",
+    "path": "context/context_doc_open_limit_order.md",
+    "dimensions": [
+      "tf",
+      "scope",
+      "known"
+    ],
+    "description": "OLO audit context covering scope, components, deployment, roles, disclosures and setup.",
+    "written_for_engagement": true,
+    "level": "engagement",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/context_doc_open_limit_order.md",
+        "location": "§0 scope and repository snapshot; §§1–2 protocol and components"
+      },
+      {
+        "path": "context/context_doc_open_limit_order.md",
+        "location": "§3 deployment environment and token conditions; §4 roles, permissions and trust model"
+      },
+      {
+        "path": "context/context_doc_open_limit_order.md",
+        "location": "§5 Previous Audits; §6 Known Issues, Accepted Risks & Design Decisions (including Tests)"
+      },
+      {
+        "path": "context/context_doc_open_limit_order.md",
+        "location": "§7 Build, Test & PoC Setup; Appendix A"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-01",
+    "path": "limitorder-org__v1-core/sentinel/IOloSentinel.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Sentinel interface with operation, role and cancellation NatSpec.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/sentinel/IOloSentinel.sol",
+        "location": "lines 53–54 (S143)"
+      },
+      {
+        "path": "limitorder-org__v1-core/sentinel/IOloSentinel.sol",
+        "location": "lines 76–76 (S144)"
+      },
+      {
+        "path": "limitorder-org__v1-core/sentinel/IOloSentinel.sol",
+        "location": "lines 117–118 (S145)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-02",
+    "path": "limitorder-org__v1-core/sentinel/OloSentinel.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Sentinel implementation with owner-timelock and guardian commentary.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/sentinel/OloSentinel.sol",
+        "location": "lines 9–11 (S146)"
+      },
+      {
+        "path": "limitorder-org__v1-core/sentinel/OloSentinel.sol",
+        "location": "lines 126–126 (S147)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-03",
+    "path": "limitorder-org__v1-core/src/OloBook.sol",
+    "dimensions": [
+      "tf",
+      "known"
+    ],
+    "description": "Core entry points with version, batch-slot and multicall commentary.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/OloBook.sol",
+        "location": "lines 177–178 (S148)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/OloBook.sol",
+        "location": "lines 280–285 (S149)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/OloBook.sol",
+        "location": "lines 438–438 (S150)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-04",
+    "path": "limitorder-org__v1-core/src/OloBookExt.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Delegatecall extension with direct-call, policy and listing commentary.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/OloBookExt.sol",
+        "location": "lines 26–32 (S151)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/OloBookExt.sol",
+        "location": "lines 62–62 (S152)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/OloBookExt.sol",
+        "location": "lines 104–104 (S153)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-05",
+    "path": "limitorder-org__v1-core/src/OloTypes.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Storage-key and packed-word libraries with ownership commentary.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/OloTypes.sol",
+        "location": "lines 93–95 (S154)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/OloTypes.sol",
+        "location": "lines 117–119 (S155)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-06",
+    "path": "limitorder-org__v1-core/src/base/OloBookAssets.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Account and settlement implementation with deposit-bound NatSpec.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/base/OloBookAssets.sol",
+        "location": "lines 22–24 (S156)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-07",
+    "path": "limitorder-org__v1-core/src/base/OloBookBatches.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Batch-slot implementation with empty-sub-order validation commentary.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/base/OloBookBatches.sol",
+        "location": "lines 351–352 (S157)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-08",
+    "path": "limitorder-org__v1-core/src/base/OloBookTakes.sol",
+    "dimensions": [
+      "tf",
+      "known"
+    ],
+    "description": "Take implementation with exact-quote bounds, rounding and budget notes.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/base/OloBookTakes.sol",
+        "location": "lines 32–94 (S158)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/base/OloBookTakes.sol",
+        "location": "lines 569–569 (S159)"
+      },
+      {
+        "path": "limitorder-org__v1-core/src/base/OloBookTakes.sol",
+        "location": "lines 666–666 (S160)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-09",
+    "path": "limitorder-org__v1-core/src/interfaces/IOloBookExt.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Extension interface with fee-recipient and flash-credit NatSpec.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/interfaces/IOloBookExt.sol",
+        "location": "lines 177–179 (S161)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-10",
+    "path": "limitorder-org__v1-core/src/interfaces/IOloFlashCallback.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Flash-callback interface with repayment and caller NatSpec.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/interfaces/IOloFlashCallback.sol",
+        "location": "lines 5–12 (S162)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-11",
+    "path": "limitorder-org__v1-core/src/libraries/PriceGrid.sol",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Price-grid library with tick-range NatSpec.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/src/libraries/PriceGrid.sol",
+        "location": "lines 30–30 (S163)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-12",
+    "path": "limitorder-org__v1-core/README.md",
+    "dimensions": [
+      "tf"
+    ],
+    "description": "Repository component map, build commands, test inventory and documentation links.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/README.md",
+        "location": "lines 99–100 (S164)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-13",
+    "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+    "dimensions": [
+      "tf",
+      "known"
+    ],
+    "description": "Assembly block index, implementation conventions and test-mutation tables.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 3–9 (S165)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 62–62 (S166)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 96–96 (S167)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 99–99 (S168)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 100–100 (S169)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 102–102 (S170)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 106–106 (S171)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 119–119 (S172)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 121–121 (S173)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/ASSEMBLY.md",
+        "location": "lines 122–122 (S174)"
+      }
+    ]
+  },
+  {
+    "id": "repo-source-14",
+    "path": "limitorder-org__v1-core/docs/LINT.md",
+    "dimensions": [
+      "tf",
+      "known"
+    ],
+    "description": "Forge lint warning triage with per-class bounds and implementation explanations.",
+    "written_for_engagement": false,
+    "level": "repo",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 3–6 (S175)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 10–10 (S176)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 11–11 (S177)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 13–13 (S178)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 14–14 (S179)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 15–15 (S180)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 16–16 (S181)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 17–17 (S182)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 18–18 (S183)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 19–19 (S184)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 20–20 (S185)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 21–21 (S186)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 22–22 (S187)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 23–23 (S188)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 24–24 (S189)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 28–28 (S190)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 30–30 (S191)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 31–31 (S192)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 33–33 (S193)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 46–49 (S194)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 52–53 (S195)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 57–65 (S196)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 83–92 (S197)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 96–103 (S198)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 107–108 (S199)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 134–153 (S200)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 154–160 (S201)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 161–166 (S202)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 167–170 (S203)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 171–174 (S204)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 175–178 (S205)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 182–182 (S206)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 186–186 (S207)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 187–187 (S208)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 188–188 (S209)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 189–189 (S210)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 190–190 (S211)"
+      },
+      {
+        "path": "limitorder-org__v1-core/docs/LINT.md",
+        "location": "lines 191–191 (S212)"
+      }
+    ]
+  },
+  {
+    "id": "deduplication-guidelines",
+    "path": "context/deduplication-guidelines.md",
+    "dimensions": [],
+    "description": "Source-referenced duplication requirements and grouping instructions.",
+    "written_for_engagement": true,
+    "level": "engagement",
+    "visibility": "participants",
+    "sources": [
+      {
+        "path": "context/judging-guidelines.md",
+        "location": "§4 Duplication guidelines; §5.10 item 3; §5.5 item 4; §6 Glossary"
+      },
+      {
+        "path": "context/severity-set.json",
+        "location": "Complete ordered severity definitions"
+      }
+    ]
+  }
+]

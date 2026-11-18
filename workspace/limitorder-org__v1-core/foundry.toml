@@ -1,0 +1,44 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.38"
+evm_version = "cancun"   # BSC, Base and Arbitrum all support Cancun opcodes incl. EIP-1153 (transient storage)
+via_ir = true
+optimizer = true
+optimizer_runs = 120
+fs_permissions = [{ access = "read", path = "./out-hirun" }, { access = "read", path = "./out-sentinel" }, { access = "read", path = "./out" }, { access = "read", path = "./src" }, { access = "read", path = "./sentinel" }]
+extra_output = ["storageLayout"]   # test/OloLayout.t.sol holds the OLO EVM contract and its extension to one layout
+
+# OloBook and OloBookExt ship at 20,000 optimizer runs (cheaper hot paths); everything else at 120.
+# Build with `FOUNDRY_PROFILE=hirun forge build src` before the tests: test/OloBase.sol deploys the OLO EVM
+# contract and its extension from out-hirun/ with vm.deployCode (without out-hirun/ it deploys the 120-run build).
+# Build src only: via-IR's output depends on every file compiled with it, so a build that takes in test/ (even
+# `--skip test`, which drops only *.t.sol) could give the contracts other bytecode whenever a test changes.
+# test/OloBase.sol reads ./src to check the artifacts' metadata: an artifact whose sources changed since its build
+# fails the tests.
+[profile.hirun]
+optimizer_runs = 20000
+out = "out-hirun"
+cache_path = "cache-hirun"
+
+# OloSentinel, the OLO EVM contract's owner (every owner call behind a delay), builds apart from src at the default
+# 120 runs: via-IR's output depends on every file compiled with it, so the sentinel's files compiled with src could
+# change the OLO EVM contract's bytecode; a profile of its own depends on no path. Build with
+# `FOUNDRY_PROFILE=sentinel forge build sentinel`: test/OloSentinelBase.sol deploys the sentinel from out-sentinel/
+# (and checks its sources as test/OloBase.sol does).
+[profile.sentinel]
+src = "sentinel"
+out = "out-sentinel"
+cache_path = "cache-sentinel"
+
+[fuzz]
+runs = 512
+
+[invariant]
+runs = 128
+depth = 300   # with order ids tracked the suite is fast; deeper runs stack orders at one price
+fail_on_revert = false
+
+[lint]
+lint_on_build = false
